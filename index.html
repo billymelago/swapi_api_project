@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>AJAX Flickr Photo Search</title>
+  <link href='http://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="css/main.css">
+  <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>    
+  <script src="js/jquery.modal.js" type="text/javascript" charset="utf-8"></script>
+  <link rel="stylesheet" href="css/jquery.modal.css" type="text/css" media="screen" />    
+  
+</head>
+<body>
+    <div class="main_cont">
+        <header>
+            <h1>Star Wars Data Search</h1>
+            <form>
+                <label for="search">Type a search term</label>
+                <input type="search" name="search" id="search">
+                <input type="submit" value="Search" id="submit">
+            </form>
+        </header>    
+        <nav>
+            <ul>
+                <li class="the_films"><h3>The Films</h3></li>
+                <li class="film_app"><h3>Character Apperances</h3></li>
+                <li class="resource"><button>People</button></li>
+                <li class="resource"><button>Starships</button></li>
+                <li class="resource"><button>Planets</button></li>
+                <li class="resource"><button>Species</button></li>
+                <li class="resource"><button>Vehicles</button></li>
+            </ul>    
+        </nav>  
+        <main>
+            <div id="movie_cont"></div>
+            <div id="characters_cont"></div>
+            <div id="photos">
+                <div class="modal"></div>
+            </div>
+        </main>      
+    </div>
+<script src="js/app.js"></script>
+<script src="js/film_app.js"></script>    
+</body>
+</html>
