@@ -1,5 +1,5 @@
 $('.film_app').click(function() {
-    var page = 1;
+    var pages = 1;
     $('#photos').html("");
     $('#movie_cont').html("");
     //Get film data
@@ -17,7 +17,7 @@ $('.film_app').click(function() {
         $('#movie_cont').html(filmsHTML);*/
         
         //Get People data
-        $.getJSON('http://swapi.co/api/people/?page=' + page, function(peopleResponse){
+        $.getJSON('http://swapi.co/api/people/?page=' + pages, function(peopleResponse){
             var people = peopleResponse.results;
             var peopleHTML = '<ul>';
 
