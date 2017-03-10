@@ -1,5 +1,6 @@
 //This app displays the character stats for each person in the film
 let showPeopleStats = (name) => {
+    $('#data_cont').html();
     $closeBtn.click(function (){$overlay.hide()});
     //Get person data
     $.getJSON('http://swapi.co/api/films/', function (filmResponse) {
@@ -9,7 +10,8 @@ let showPeopleStats = (name) => {
             var data = peopleResponse;
             var birthday, meters, realfeet, feet, inches, height, mass, gender;
             var peopleHTML = '<p>Character stats for: ' + name + '</p>';
-            peopleHTML += '<ul>';
+            peopleHTML += '<h2>' + data.results[0].name + '</h2>';
+            peopleHTML += '<div>';
             $.each(data.results, function (i, peopleData) {
                 gender = peopleData.gender;
                 if (gender === 'male') {
@@ -39,17 +41,16 @@ let showPeopleStats = (name) => {
                   mass = Math.floor(mass * 2.20) + 'lbs';  
                 }
                 if(mass === 'unknown') mass = 'not documented';
-                peopleHTML += '<li class="name">';
-                peopleHTML += '<h2>' + peopleData.name + '</h2>';
-                peopleHTML += '<h5>Year of Birth: ' + birthday + '</h5>';
-                peopleHTML += '<h5>Height: ' + height + '</h5>';
-                peopleHTML += '<h5>Weight: ' + mass + '</h5>';
-                peopleHTML += '<h5>Skin Tone: ' + peopleData.skin_color + '</h5>';
-                peopleHTML += '<h5>Eye Color: ' + peopleData.eye_color + '</h5>';
+                peopleHTML += '<ul class="name">';
+                peopleHTML += '<li>Year of Birth: ' + birthday + '</li>';
+                peopleHTML += '<li>Height: ' + height + '</li>';
+                peopleHTML += '<li>Weight: ' + mass + '</li>';
+                peopleHTML += '<li>Skin Tone: ' + peopleData.skin_color + '</li>';
+                peopleHTML += '<li>Eye Color: ' + peopleData.eye_color + '</li>';
 
                 if(peopleData.films.length){
-                    peopleHTML += '<h3>' + name + ' has appeared in the following film(s):</h3>';
-                    peopleHTML += '<ul class="film_name">';
+                    peopleHTML += '<li><h3>' + name + ' has appeared in the following film(s):</h3>';
+                    peopleHTML += '<ol class="film_name">';
                     //Loop thru films data
                     $.each(peopleData.films, function(i, filmURL) {
                         for (var c = 0; c < films.length; c++) {
@@ -61,14 +62,14 @@ let showPeopleStats = (name) => {
                             }//end if films match
                         }
                     });//end $.each(filmURL)
-                    peopleHTML += '</ul>';
+                    peopleHTML += '</ol></li>';
                 } //end if films have length
                 $.getJSON(peopleData.homeworld, function (homeworldResponse) {
                     var homePlanet = homeworldResponse.name;
                     if (homePlanet == 'unknown') {
                         peopleHTML += '<h3>It is not documented on which planet ' + peopleData.name + ' was born.</h3>';
                     } else {
-                            peopleHTML += '<p>' + peopleData.name + ' was born on the Planet <span id="homeworld">' + homeworldResponse.name + '</span>, in the year ' + birthday + '.';
+                            peopleHTML += '<p>' + peopleData.name + ' was born on the Planet <span id="homeworld">' + homeworldResponse.name + '</span> in the year ' + birthday + '.';
                         };
                     //$('#data_cont').html(peopleHTML);
                     console.log(homeworldResponse.name);
@@ -80,15 +81,23 @@ let showPeopleStats = (name) => {
                 $.getJSON(peopleData.species, function (speciesResponse) {
                     var species = speciesResponse.name;
                     var lifeSpan = speciesResponse.average_lifespan;
+                    var language = speciesResponse.language;
+                    if(language === 'n/a') {
+                        language = 'a Binary language ';
+                    } else if (language === 'unknown') {
+                        language = 'an unknown language';
+                    } else {
+                        language;
+                    }
                     if (lifeSpan === 'unknown') {
-                        lifeSpan = 'The average lifespan of ' + species + 's is not know...'
+                        lifeSpan = '. The average lifespan of ' + species + 's is not known.'
                     } else if(lifeSpan == 'indefinite') {
-                        lifeSpan = species + 'Will live forever!'
+                        lifeSpan = 'and will live FOREVER!'
                     } else {
                         lifeSpan = ' and are expected to live for ' + lifeSpan + ' years.'
                     }
                     if (species) {
-                        peopleHTML += ' ' + gender + ' is from the <span id="species">' + species + ' species.</span> ' + species + 's speak the ' + speciesResponse.language +  ' language ' + lifeSpan + '</p>';
+                        peopleHTML += ' ' + gender + ' is from the <span id="species">' + species + ' species.</span> ' + species + 's speak ' + language +  '  ' + lifeSpan + '</p>';
                         }
                     $('#data_cont').html(peopleHTML);
                     console.log(species);
@@ -98,8 +107,8 @@ let showPeopleStats = (name) => {
                 });//End getJSON species
             
             }); // end each     
-            peopleHTML += '</li>';
             peopleHTML += '</ul>';
+            peopleHTML += '</div>';
             $overlay.show();
             //$('#data_cont').html(peopleHTML);
         

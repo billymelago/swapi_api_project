@@ -1,4 +1,32 @@
-#photos {
-    background: red;
-    border: solid blue;
+#overlay {
+    background: rgba(0,0,0,.7);
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    position: absolute;
+    padding: 20px;
+    top: 0;
+    left: 0;
+    display: none;
+    color: ghostwhite;
+    -webkit-animation-name: fadeIn;
+    animation-name: fadeIn;
+    -webkit-animation-duration: 0.5s;
+    animation-duration: 0.5s;
+}
+#btn_div {
+    text-align: center;
+    display: block;
+}
+#count_cont {
+}
+
+
+@-webkit-keyframes fadeIn {
+    from {opacity: 0} 
+    to {opacity: 1}
+}
+@keyframes fadeIn {
+    from {opacity: 0} 
+    to {opacity: 1}
 }

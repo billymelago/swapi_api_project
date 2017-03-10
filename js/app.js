@@ -1,85 +1,30 @@
-var $, $searchField, $submitButton, peoppleAPI, person, swapiOptions, nameHTML, filmAPI, film, swapiOptionsF, filmHTML, keyword, keywordAPI, swapiOptionsK, keywordHTML, films, filmsHTML;
-var $overlay = $('<div id="overlay"></div>');
-
+var $,
+    $searchField, $submitButton, peoppleAPI, person, swapiOptions, planetsAPI, planet, displayPlanets, speciesAPI, species, displaySpecies, nameHTML, filmAPI, film, swapiOptionsF, filmHTML, keyword, keywordAPI, swapiOptionsK, keywordHTML, films, filmsHTML, nextText, prevText, randomPageNum, count, Rcount,
+    $searchField = $('#search'),
+    $submitButton = $('#submit'),
+    $overlay = $('<div id="overlay"><div id="data_cont"></div><div id="film_cont"></div></div>'),
+    $buttons = $('<div id="btn_cont"><button id="prev" class="btn btn-warning btn-sml" role="button">&#10094; Previous</button><button id="next" role="button">Continue &#10095;</button></div>'),
+    $nextBtn = ('#next'),
+    $prevBtn = ('#prev'),
+    $closeBtn = $('<span id="close_btn">X</span>');
+$overlay.append($closeBtn);
+$overlay.append($buttons);
 $(document).ready(function () {
     "use strict";
     $("body").append($overlay);
-    $('form').submit(function (evt) {
-        evt.preventDefault();
-        $searchField = $('#search');
-        $submitButton = $('#submit');
-        $searchField.prop('disabled', true);
-        $submitButton.attr('disabled', true).val('Looking...');
-
-        // the AJAX part
-        peoppleAPI = "http://swapi.co/api/people/";
-        person = $('#search').val().toLowerCase();
-        swapiOptions = {
-            search: person,
-            format: "json"
-        };
-        function displayName(data) {
-            nameHTML = '<ul>';
-            $.each(data.results, function (i, name) {
-                nameHTML += '<li class="names">';
-                nameHTML += '<h2>' + name.name + '</h2>';
-                nameHTML += '</li>';
-            }); // end each
-            
-            nameHTML += '</ul>';
-            $('#photos').html(nameHTML);
-            $searchField.prop('disabled', false);
-            $submitButton.attr('disabled', false).val('Search');
-        }
-        $.getJSON(peoppleAPI, swapiOptions, displayName);
-
-        // the AJAX films part
-        filmAPI = "http://swapi.co/api/films/";
-        film = $('#search').val().toLowerCase();
-        swapiOptionsF = {
-            search: film,
-            format: "json"
-        };
-        function displayFilm(data) {
-            filmHTML = '<ul>';
-            $.each(data.results, function (i, film) {
-                filmHTML += '<li class="films">';
-                filmHTML += '<h2>' + film.title + '</h2>';
-                filmHTML += '</li>';
-            }); // end each
-            filmHTML += '</ul>';
-            $('#photos').html(filmHTML);
-            $searchField.prop('disabled', false);
-            $submitButton.attr('disabled', false).val('Search');
-        }
-        $.getJSON(filmAPI, swapiOptionsF, displayFilm);
-
-        // the AJAX keyword part
-        keyword = $('#search').val().toLowerCase();
-        keywordAPI = "http://swapi.co/api/" + keyword + '/';
-        swapiOptionsK = {
-            //search: keyword,
-            format: "json"
-        };
-        function displayKeyword(data) {
-            keywordHTML = '<div>';
-            keywordHTML += '<span class="keyword">';
-            keywordHTML += '<h2>In the Star Wars API there are a total of  ' + data.count + ' ' + keyword + '!</h2>';
-            keywordHTML += '</span>';
-            keywordHTML += '</div>';
-            $('#photos').html(keywordHTML);
-            $searchField.prop('disabled', false);
-            $submitButton.attr('disabled', false).val('Search');
-        }
-        $.getJSON(keywordAPI, swapiOptionsK, displayKeyword);    
-    }); // end click
-    
+    $('input[type=reset]').click(() => {});
     //Navigation click loads first page of swapi results
     $('.resource').click(function () {
+        var page = 1;
         $(".resource").removeClass("selected");
         $(this).addClass("selected");
+        $overlay.show();
+        $closeBtn.click(() => {
+            $overlay.hide();
+            nextText = '';
+            prevText = '';
+        });
         var resource = $(this).text().toLowerCase(),
-            page = 1,
             swapiAPI = "http://swapi.co/api/" + resource + "/?page=" + page,
             swapiOptionsR = {
             };
@@ -95,55 +40,77 @@ $(document).ready(function () {
             nameHTML += '</ul>';
             $('#characters_cont').html();
             $('#movie_cont').html();
-            $('#overlay').html(nameHTML);
-            
+            $('#data_cont').html(nameHTML);
+            $('.names').click(function () {
+                let personURL = $(this).text();
+                showPeopleStats(personURL);
+            });
+            nextText = data.next;
+            console.log(nextText);
+            prevText = data.previous;
+            console.log(prevText);
             $('#next').click(function () {
-                $('#photos').html();
-                var nextText = data.next;
-                console.log(page);
-                if (page < 9) {
+                $('#data_cont').html();
+                console.log('current page:' + page);
+                if (nextText) {
                     page++;
-                    console.log(page);
                     nameHTML = '<p>' + resource.toUpperCase() + ' Page: ' + page + '</p>';
                     function displayNextResource(data) {
+                        prevText = data.previous;
+                        nextText = data.next;
                         nameHTML += '<ul>';
                         $.each(data.results, function (i, name) {
                             nameHTML += '<li class="names">';
                             nameHTML += '<h2>' + name.name  + '</h2>';
                             nameHTML += '</li>';
                         }); // end each
-
                         nameHTML += '</ul>';
                         $('#characters_cont').html();
                         $('#movie_cont').html();
-                        $('#overlay').html(nameHTML);
+                        $('#photos').html();
+                        $('#data_cont').html();
+                        $('#data_cont').html(nameHTML);
+                        $('.names').click(function () {
+                            let personURL = $(this).text();
+                            showPeopleStats(personURL);
+                        });
                     }
-                    $.getJSON("http://swapi.co/api/" + resource + "/?page=" + page, displayNextResource);
-                    console.log(nextText);
-                } else {console.log("Nope")}//End IF
+                    $.getJSON(nextText, displayNextResource);
+                    
+                }//End IF
+                console.log('Next url:' + nextText);
             });//End $(#next).click()
             
-
+            $('#prev').click(function () {
+                $('#data_cont').html();
+                if (prevText) {
+                    page--;
+                    console.log('Current page:' + page);
+                    nameHTML = '<p>' + resource.toUpperCase() + ' Page: ' + page + '</p>';
+                    function displayPrevResource(data) {
+                        prevText = data.previous;
+                        nextText = data.next;
+                        nameHTML += '<ul>';
+                        $.each(data.results, function (i, name) {
+                            nameHTML += '<li class="names">';
+                            nameHTML += '<h2>' + name.name  + '</h2>';
+                            nameHTML += '</li>';
+                        }); // end each
+                        nameHTML += '</ul>';
+                        $('#characters_cont').html();
+                        $('#movie_cont').html();
+                        $('#data_cont').html();
+                        $('#data_cont').html(nameHTML);
+                        $('.names').click(function () {
+                            let personURL = $(this).text();
+                            showPeopleStats(personURL);
+                        });
+                    }
+                    $.getJSON(prevText, displayPrevResource);
+                }//End IF
+                console.log('Prev url:' + prevText);
+            });//End $(#prev).click()
         }//End displayResource()
         $.getJSON(swapiAPI, swapiOptionsR, displayResource);
-    });
-                
-        //Get film data
-    $('.the_films').click(function () {
-        $('#photos').html("");
-        $('#characters_cont').html("");
-        $.getJSON('http://swapi.co/api/films/', function (filmResponse) {
-            films = filmResponse.results;
-            filmsHTML = '<ul>';
-
-            //Loop thru film data
-            $.each(films, function (i, filmData) {
-                filmsHTML += '<li class="filmTitle">';
-                filmsHTML += filmData.title;
-                filmsHTML += '</li>';
-            });// end .each(filmData)
-            filmsHTML += '</ul>';
-            $('#movie_cont').html(filmsHTML);
-        });
     });
 }); // end ready
