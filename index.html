@@ -16,6 +16,7 @@
         <nav>
             <span class="the_films"><p>Search through all resources by typing a specific name into the search box or select random to get a random list of the selected resource. </p></span>
         </nav>
+        
         <section>
             <form id="swapiSearchForm">
                 <select required>
@@ -28,7 +29,7 @@
                     <option value="Vehicles">Vehicles</option>
                 </select>
                 <label for="search">Type a search term</label>
-                <input type="search" name="search" id="search" placeholder="Enter specific resource">
+                <input type="search" name="search" id="search" placeholder="Enter specific resource" required>
                 <input type="submit" value="Search" id="submit">
                 <input type="reset">
                 <button type="button" id="random">Random</button>
@@ -40,6 +41,11 @@
     </div>
     <script src="js/app.js"></script>   
     <script src="js/people_app.js"></script> 
+    <script src="js/planets_app.js"></script>
     <script src="js/ajaxResurceFunc.js"></script>
+    <script src="js/film_app.js"></script>
+    <script src="js/species_app.js"></script>
+    <script src="js/starship_app.js"></script>
+    <script src="js/vehicles_app.js"></script>
 </body>
 </html>

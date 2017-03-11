@@ -1,4 +1,5 @@
 //This app displays the character stats for each person in the film
+//This gets displayed in the overlay
 let showPeopleStats = (name) => {
     $('#data_cont').html();
     $closeBtn.click(function (){$overlay.hide()});
@@ -49,7 +50,7 @@ let showPeopleStats = (name) => {
                 peopleHTML += '<li>Eye Color: ' + peopleData.eye_color + '</li>';
 
                 if(peopleData.films.length){
-                    peopleHTML += '<li><h3>' + name + ' has appeared in the following film(s):</h3>';
+                    peopleHTML += '<li><h3>' + name + ' has appeared in:</h3>';
                     peopleHTML += '<ol class="film_name">';
                     //Loop thru films data
                     $.each(peopleData.films, function(i, filmURL) {
@@ -73,9 +74,6 @@ let showPeopleStats = (name) => {
                         };
                     //$('#data_cont').html(peopleHTML);
                     console.log(homeworldResponse.name);
-                    $('#homeworld').click(function () {
-                        console.log($(this).text());
-                    });
                 });//End getJSON homeworld
                 
                 $.getJSON(peopleData.species, function (speciesResponse) {
@@ -105,22 +103,11 @@ let showPeopleStats = (name) => {
                         console.log($(this).text());
                     });
                 });//End getJSON species
-            
             }); // end each     
             peopleHTML += '</ul>';
             peopleHTML += '</div>';
             $overlay.show();
             //$('#data_cont').html(peopleHTML);
-        
-            //If the next button is clicked
-            //check and see there is another li
-            //grab the name from the li
-            //store it as the URL for the getJSON call
-            //make the getJSON call and display the results 
-
-      
         }); // end JSON(peopleResponse)
     }); // end JSON(filmResponse)
-    
-//}); 
 };

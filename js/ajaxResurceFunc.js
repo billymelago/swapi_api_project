@@ -1,8 +1,9 @@
-//These functions are called when a user types in the search box
+
 let searchResource = $('select option:selected').val();
 
 let searchValue = () =>{
     keyword = $('#search').val().toLowerCase();
+    
 };
 
 let createRandoNumber = (x) =>{
@@ -19,26 +20,65 @@ let searchFound = () => {
     $searchField.prop('disabled', false);
     $submitButton.attr('disabled', false).val('Search');
 };
-    
+  
+//This function shows just the name of item searched
 let displaySearchResults = function display(data) {
     nameHTML = '<ul>';
     $.each(data.results, function (i, name) {
-        nameHTML += '<li class="names">';
+        //nameHTML += '<li class="names">';
+        switch (searchResource) {
+        case 'People':
+            nameHTML += '<li class="names">';
+            break;
+        case 'Species':
+            nameHTML += '<li class="species">';
+            break;
+        case 'Planets':
+            nameHTML += '<li class="planets">';
+            break;
+        case 'Starships':
+            nameHTML += '<li class="starships">';
+            break;
+        case 'Vehicles':
+            nameHTML += '<li class="vehicles">';
+            break;
+        case 'Films':
+            $('#random').hide();
+            searchFilms();
+            break;    
+        default:
+            alert("Sorry we can't find what you're searching for.");
+    }
         nameHTML += '<h2>' + name.name + '</h2>';
         nameHTML += '</li>';
     }); // end each
     nameHTML += '</ul>';
     $('main').html(nameHTML);
+    //Click on name to show overlay and display results
     $('.names').click(function () {
         let personURL = $(this).text();
         showPeopleStats(personURL);
     });
-    //$('.planets').click();
-    //$('.species').click();
-    //$('.starships').click();
-    //$('.vehicles').click();
+    $('.planets').click(function() {
+        let planetURL = $(this).text();
+        showPlanetsStats(planetURL);
+    });
+    $('.species').click(function() {
+        let speciesURL = $(this).text();
+        showSpeciesStats(speciesURL);
+    });
+    $('.starships').click(function() {
+        let starURL = $(this).text();
+        showStarshipStats(starURL);
+    });
+    $('.vehicles').click(function () {
+        let vehicleURL = $(this).text();
+        showvehicleStats(vehicleURL);
+    });
 };
 
+//Function called when a film is searched
+//It doesn't have a name attr have to use title
 let displaySearchFilmResults = function displayFilm(data) {
     filmHTML = '<ul>';
     $.each(data.results, function (i, film) {
@@ -48,9 +88,9 @@ let displaySearchFilmResults = function displayFilm(data) {
     }); // end each
     filmHTML += '</ul>';
     $('main').html(filmHTML);
-
+    //Click on title to display overlay, stats and call Spotify
     $('.films').click(function(){
-        //Show Overlay
+        /*//Show Overlay
         $overlay.show();
         //Get the name of the film that was clicked
         var filmName = $(this).text();
@@ -61,64 +101,97 @@ let displaySearchFilmResults = function displayFilm(data) {
             var results = data.results;
             filmHTML = '<p>' + results[0].producer + '</p>';
             $('#overlay').html(filmHTML);
-            console.log(results[0]);
         }
-        $.getJSON(filmURL, displayFilmDetails);
+        $.getJSON(filmURL, displayFilmDetails);*/
+        //Get the name of the film that was clicked
+        var filmName = $(this).text();
+        showFilmStats(filmName);
     });//end films.click()
 };
 
+//This function shows just the name of item when 'RANDOM' is clicked
 let displayRandomSearchResults = (name) => {
-    nameHTML = '<ul>';    
+    nameHTML = '<ul>';
+    console.log(searchResource);
+    switch (searchResource) {
+        case 'people':
             nameHTML += '<li class="names">';
-            nameHTML += '<h2>' + name.name + '</h2>';
-            nameHTML += '</li>';
-            nameHTML += '</ul>';
-            $('main').html(nameHTML);
-            $('.names').click(function () {
-                let personURL = $(this).text();
-                showPeopleStats(personURL);
-});
+            break;
+        case 'species':
+            nameHTML += '<li class="species">';
+            break;
+        case 'planets':
+            nameHTML += '<li class="planets">';
+            break;
+        case 'starships':
+            nameHTML += '<li class="starships">';
+            break;
+        case 'vehicles':
+            nameHTML += '<li class="vehicles">';
+            break;
+        case 'films':
+            $('#random').hide();
+            searchFilms();
+            break;    
+        default:
+            alert("Sorry we can't find what you're searching for.");
+    }
+    nameHTML += '<h2>' + name.name + '</h2>';
+    nameHTML += '</li>';
+    nameHTML += '</ul>';
+    $('main').html(nameHTML);
+    //Click on name to show overlay and display results
+    $('.names').click(function () {
+        let personURL = $(this).text();
+        showPeopleStats(personURL);
+    });
+    $('.planets').click(function () {
+        let planetURL = $(this).text();
+        showPlanetsStats(planetURL);
+    });
+    $('.species').click(function() {
+        let speciesURL = $(this).text();
+        showSpeciesStats(speciesURL);
+    });
+    $('.starships').click(function() {
+        let starURL = $(this).text();
+        showStarshipStats(starURL);
+    });
+    $('.vehicles').click(function() {
+        let vehicleURL = $(this).text();
+        showvehicleStats(vehicleURL);
+    });
 };
 
+//Use the name from the resource selected (sr) 
+//to figure out which resource to call
+//This is the function to call when random button is clicked
 let getDataCount = (sr) => {
-    keywordAPI = "http://swapi.co/api/" + sr;
-    
+    keywordAPI = "http://swapi.co/api/" + sr + "/";
     function displayKeyword(data) {
+        //Get number of items to search
         count = data.count;
         console.log(count);
+        //Creates a random number based on resource count
         createRandoNumber(count);
-        console.log(createRandoNumber);
-        peoppleAPI = "http://swapi.co/api/people/" + randomPageNum + "/";
-        /*swapiOptions = {
-            search: count
-        };*/
-        function displayRandomSearchResults(data) {
-            nameHTML = '<ul>';    
-            nameHTML += '<li class="names">';
-            nameHTML += '<h2>' + name.name + '</h2>';
-            nameHTML += '</li>';
-            nameHTML += '</ul>';
-            $('main').html(nameHTML);
-            $('.names').click(function () {
-                let personURL = $(this).text();
-                showPeopleStats(personURL);
-            });
-        $.getJSON(peoppleAPI, displayRandomSearchResults);
+        console.log(randomPageNum);
+        //Call function and insert the specific resource to display
+        searchRandoResource(randomPageNum);
     }
-    $.getJSON(keywordAPI, swapiOptions, displayKeyword);
- }
+    $.getJSON(keywordAPI, displayKeyword);
 };
 
-let searchRandoPeople = (rpn) => {
-    peoppleAPI = "http://swapi.co/api/people/" + rpn + "/";
-    /*swapiOptions = {
-        search: rpn
-    };*/
-    $.getJSON(peoppleAPI, displayRandomSearchResults);
+//Gets the selected resource and inserts the random page to search
+let searchRandoResource = (rpn) => {
+    randomAPI = "http://swapi.co/api/" + searchResource + "/" + rpn + "/";
+    $.getJSON(randomAPI, displayRandomSearchResults).fail(function() {
+        $('main').html('<p>Sorry, resource number ' + rpn + ' in ' + searchResource + ' has no information to display.</p>');
+  });
 };
 
 // the AJAX keyword part, how many of each resource are in the API
 //People, Films, Planets, Species, Vehicles
+//Thisfunction is called when the selected resource is changed
 let displayCount = () => {
     searchResource = $('select option:selected').val();
     searchResource = searchResource.toLowerCase();
@@ -134,6 +207,8 @@ let displayCount = () => {
     $.getJSON(keywordAPI, displayKeyword);
  };
 
+
+//Functions to call when the 'SEARCH' button is clicked
 // the AJAX People part, searches the people API for a character name
 let searchPeople = () => {
     peoppleAPI = "http://swapi.co/api/people/";
@@ -206,6 +281,7 @@ let selectResource = (searchResource) => {
             searchVehicles();
             break;
         case 'Films':
+            $('#random').hide();
             searchFilms();
             break;    
         default:
@@ -219,7 +295,12 @@ $('select').change(() => {
     $('main').html('');
     $('#search').val('');
     searchResource = $('select option:selected').val();
-    //selectResource(searchResource);
+    if (searchResource === 'Films') {
+        $('#random').hide();
+        searchFilms()
+    } else {
+        $('#random').show();
+    }
 });
 $('form').submit((evt) => {
     evt.preventDefault();
@@ -231,12 +312,12 @@ $('form').submit((evt) => {
     searchFound();
 });
 $('#random').click(() => {
+    $('main').html('');
     //Get resource to search
     searchResource = searchResource.toLowerCase();
-    createRandoNumber(87);
-    console.log(randomPageNum);
     //run function that takes the resource and gets a random number between 1 and however many items are in that resource
-    searchRandoPeople(randomPageNum);
+    getDataCount(searchResource);
+    console.log(randomPageNum);
     //searchlooking
 });
 
