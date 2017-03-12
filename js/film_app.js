@@ -43,7 +43,7 @@ let showFilmStats = (filmTitle) => {
             $.each(results, function (i, name) {
                 console.log(name.episode_id);
                 getEpisodeRoman(name.episode_id);
-                filmHTML += '<li class="names">';
+                filmHTML += '<li class="names film_title">';
                 filmHTML += '<h2>Star Wars, Episode ' + romanID + ': ' + name.title + '</h2>';
                 filmHTML += '<p>Release Date, ' + name.release_date + '.  Directed by ' + name.director  + ' and Produced by ' + name.producer + '.</p>';
                 filmHTML += '<div id="opening_crawl"><p>' + name.opening_crawl + '</p></div>';

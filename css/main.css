@@ -20,8 +20,14 @@
 }
 #count_cont {
 }
-
-
+#film_cont {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+}
+#film_cont {
+    border: solid red 2px;
+}
 @-webkit-keyframes fadeIn {
     from {opacity: 0} 
     to {opacity: 1}

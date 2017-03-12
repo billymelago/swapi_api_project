@@ -81,13 +81,16 @@ let displaySearchResults = function display(data) {
 //It doesn't have a name attr have to use title
 let displaySearchFilmResults = function displayFilm(data) {
     filmHTML = '<ul>';
+    var titleName = data.results.title;
     $.each(data.results, function (i, film) {
         filmHTML += '<li class="films">';
         filmHTML += '<h2>' + film.title + '</h2>';
         filmHTML += '</li>';
     }); // end each
     filmHTML += '</ul>';
+    
     $('main').html(filmHTML);
+    
     //Click on title to display overlay, stats and call Spotify
     $('.films').click(function(){
         /*//Show Overlay
@@ -106,6 +109,7 @@ let displaySearchFilmResults = function displayFilm(data) {
         //Get the name of the film that was clicked
         var filmName = $(this).text();
         showFilmStats(filmName);
+        app.init(filmName);
     });//end films.click()
 };
 
