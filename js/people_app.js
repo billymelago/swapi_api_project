@@ -1,8 +1,16 @@
 //This app displays the character stats for each person in the film
 //This gets displayed in the overlay
 let showPeopleStats = (name) => {
-    $('#data_cont').html();
-    $closeBtn.click(function (){$overlay.hide()});
+    $overlay.show(function() {
+        $('#data_cont').html('<img src="../ripple.svg" alt="">');
+    });
+    
+    $closeBtn.click(function (){
+        $overlay.hide();
+        $('#data_cont').html("");
+        $('#film_cont').html("");
+    });
+    
     //Get person data
     $.getJSON('http://swapi.co/api/films/', function (filmResponse) {
         var films = filmResponse.results;
@@ -10,6 +18,7 @@ let showPeopleStats = (name) => {
         $.getJSON('http://swapi.co/api/people/?search=' + name, function (peopleResponse) {
             var data = peopleResponse;
             var birthday, meters, realfeet, feet, inches, height, mass, gender;
+            console.log(name);
             var peopleHTML = '<p>Character stats for: ' + name + '</p>';
             peopleHTML += '<h2>' + data.results[0].name + '</h2>';
             peopleHTML += '<div>';
@@ -51,12 +60,12 @@ let showPeopleStats = (name) => {
 
                 if(peopleData.films.length){
                     peopleHTML += '<li><h3>' + name + ' has appeared in:</h3>';
-                    peopleHTML += '<ol class="film_name">';
+                    peopleHTML += '<ol class="film_list">';
                     //Loop thru films data
                     $.each(peopleData.films, function(i, filmURL) {
                         for (var c = 0; c < films.length; c++) {
                             if (films[c].url === filmURL) {
-                                peopleHTML += '<li>';
+                                peopleHTML += '<li class="film_name">';
                                 peopleHTML += films[c].title;
                                 peopleHTML += '</li>';
                                 break;   
@@ -98,15 +107,11 @@ let showPeopleStats = (name) => {
                         peopleHTML += ' ' + gender + ' is from the <span id="species">' + species + ' species.</span> ' + species + 's speak ' + language +  '  ' + lifeSpan + '</p>';
                         }
                     $('#data_cont').html(peopleHTML);
-                    console.log(species);
-                    $('#species').click(function () {
-                        console.log($(this).text());
-                    });
                 });//End getJSON species
             }); // end each     
             peopleHTML += '</ul>';
             peopleHTML += '</div>';
-            $overlay.show();
+            
             //$('#data_cont').html(peopleHTML);
         }); // end JSON(peopleResponse)
     }); // end JSON(filmResponse)

@@ -1,8 +1,16 @@
 //This app displays the stats for each starship in the film
 //This gets displayed in the overlay
 let showStarshipStats = (starshipName) => {
-    $('#data_cont').html("");
-    $closeBtn.click(function (){$overlay.hide()});
+    $overlay.show(function() {
+        $('#data_cont').html('<img src="../ripple.svg" alt="">');
+    });
+    
+    $closeBtn.click(function (){
+        $overlay.hide();
+        $('#data_cont').html("");
+        $('#film_cont').html("");
+    });
+    setTimeout(function() {
     //Get person data
     $.getJSON('http://swapi.co/api/films/', function (filmResponse) {
         var films = filmResponse.results;
@@ -42,12 +50,12 @@ let showStarshipStats = (starshipName) => {
 
                 if(starData.films.length){
                     starHTML += '<li><h3>The ' + starshipName + ' has appeared in:</h3>';
-                    starHTML += '<ol class="film_name">';
+                    starHTML += '<ol>';
                     //Loop thru films data
                     $.each(starData.films, function(i, filmURL) {
                         for (var c = 0; c < films.length; c++) {
                             if (films[c].url === filmURL) {
-                                starHTML += '<li>';
+                                starHTML += '<li class="film_name">';
                                 starHTML += films[c].title;
                                 starHTML += '</li>';
                                 break;   
@@ -59,9 +67,17 @@ let showStarshipStats = (starshipName) => {
             }); // end each     
             starHTML += '</ul>';
             starHTML += '</div>';
-            $overlay.show();
             $('#data_cont').html(starHTML);
+            //Click on title to display overlay, stats and call Spotify
+            $('.film_name').click(function(){
+                //Get the name of the film that was clicked
+                var filmName = $(this).text();
+                showFilmStats(filmName);
+                app.init(filmName);
+
+            });//end films.click()
         }); // end JSON(peopleResponse)
     }); // end JSON(filmResponse)
+    }, 2000);
 //}); 
 };

@@ -1,8 +1,16 @@
 //This app displays the stats for each species in the film
 //This gets displayed in the overlay
 let showSpeciesStats = (speciesName) => {
-    $('#data_cont').html("");
-    $closeBtn.click(function (){$overlay.hide()});
+    $overlay.show(function() {
+        $('#data_cont').html('<img src="../ripple.svg" alt="">');
+    });
+    
+    $closeBtn.click(function (){
+        $overlay.hide();
+        $('#data_cont').html("");
+        $('#film_cont').html("");
+    });
+    setTimeout(function() {
     //Get person data
     $.getJSON('http://swapi.co/api/films/', function (filmResponse) {
         var films = filmResponse.results;
@@ -35,12 +43,12 @@ let showSpeciesStats = (speciesName) => {
 
                 if(speciesData.films.length){
                     speciesHTML += '<li><h3>The ' + speciesName + ' species has appeared in:</h3>';
-                    speciesHTML += '<ol class="film_name">';
+                    speciesHTML += '<ol>';
                     //Loop thru films data
                     $.each(speciesData.films, function(i, filmURL) {
                         for (var c = 0; c < films.length; c++) {
                             if (films[c].url === filmURL) {
-                                speciesHTML += '<li>';
+                                speciesHTML += '<li class="film_name">';
                                 speciesHTML += films[c].title;
                                 speciesHTML += '</li>';
                                 break;   
@@ -49,6 +57,7 @@ let showSpeciesStats = (speciesName) => {
                     });//end $.each(filmURL)
                     speciesHTML += '</ol></li>';
                 } //end if films have length
+               
                 $.getJSON(speciesData.homeworld, function (homeworldResponse) {
                     var homePlanet = homeworldResponse.name;
                     if (homePlanet == 'unknown') {
@@ -62,17 +71,17 @@ let showSpeciesStats = (speciesName) => {
             }); // end each     
             speciesHTML += '</ul>';
             speciesHTML += '</div>';
-            $overlay.show();
             $('#data_cont').html(speciesHTML);
-        
-            //If the next button is clicked
-            //check and see there is another li
-            //grab the name from the li
-            //store it as the URL for the getJSON call
-            //make the getJSON call and display the results 
+            //Click on title to display overlay, stats and call Spotify
+            $('.film_name').click(function(){
+                //Get the name of the film that was clicked
+                var filmName = $(this).text();
+                showFilmStats(filmName);
+                app.init(filmName);
 
-      
+            });//end films.click()
         }); // end JSON(peopleResponse)
     }); // end JSON(filmResponse)
+    }, 2000);    
 //}); 
 };

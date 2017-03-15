@@ -9,8 +9,9 @@ app.spotifyURL = 'https://api.spotify.com/v1/';
 app.events = function(f) {
     let filmName = f;
     let search = app.searchAlbum(filmName);
-    app.retreiveAlbumURI(search);
+    
     app.retreiveAlbumArt(search);
+    app.retreiveAlbumURI(search);
 };
 
 //Go to spotify and get the album
@@ -44,10 +45,13 @@ app.retreiveAlbumURI = function(search) {
 //then Build playlist
 app.buildPlaylist = function(albumURI) {
     $.when(albumURI)
+        .then($('.loader').show())
         .then((albumURI) => {
-            console.log(albumURI);
+            
+            $('#cover_art').append(`<div class="loader_cont loader"><img class="loader_icon" src="ripple.svg" alt=""></div>`);
+       
             const baseUrl = `https://embed.spotify.com/?uri=${albumURI}`;
-            $('#film_cont').html(`<div id="soundtrack"><iframe src="${baseUrl}" width="200" height="280" frameborder="0" allowtransparency="true"></iframe></div>`);
+            $('#film_cont').append(`<div id="soundtrack"><iframe src="${baseUrl}" width="200" height="300" frameborder="0" allowtransparency="true"></iframe></div>`);
         });
 };
 //Display movie album cover art
@@ -55,8 +59,8 @@ app.displayCoverArt = function(coverArt) {
     $.when(coverArt)
         .then((coverArt) => {
             const imgURL = coverArt;
-            $(`<div id="cover_art"><img src="${imgURL}" alt"Album Cover Art"><img></div>`).insertAfter('#data_cont ul h2');
-        });
+            $('#film_cont').html(`<div id="cover_art"><img src="${imgURL}" alt"Album Cover Art"><img></div>`);
+            });
 };
 //Initilizes the app and
 //Passes the films name along to the events function

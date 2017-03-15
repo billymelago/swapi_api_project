@@ -11,6 +11,13 @@ let createRandoNumber = (x) =>{
     return randomPageNum;
 };
 
+let createRandoLetter = () =>{
+    letters = 'abcdefghijklmnoprstuvwxyz';
+    pickLetter = Math.floor(Math.random() * letters.length);
+    randomLetter = letters.charAt(pickLetter);
+    return randomLetter;
+};
+
 let searchLooking = () => {
     $searchField.prop('disabled', true);
     $submitButton.attr('disabled', true).val('Looking...');
@@ -23,26 +30,28 @@ let searchFound = () => {
   
 //This function shows just the name of item searched
 let displaySearchResults = function display(data) {
+    $('#film_cont').html("");
     nameHTML = '<ul>';
     $.each(data.results, function (i, name) {
+        searchResource = searchResource.toLowerCase();
         //nameHTML += '<li class="names">';
         switch (searchResource) {
-        case 'People':
+        case 'people':
             nameHTML += '<li class="names">';
             break;
-        case 'Species':
+        case 'species':
             nameHTML += '<li class="species">';
             break;
-        case 'Planets':
+        case 'planets':
             nameHTML += '<li class="planets">';
             break;
-        case 'Starships':
+        case 'starships':
             nameHTML += '<li class="starships">';
             break;
-        case 'Vehicles':
+        case 'vehicles':
             nameHTML += '<li class="vehicles">';
             break;
-        case 'Films':
+        case 'films':
             $('#random').hide();
             searchFilms();
             break;    
@@ -81,8 +90,11 @@ let displaySearchResults = function display(data) {
 //It doesn't have a name attr have to use title
 let displaySearchFilmResults = function displayFilm(data) {
     filmHTML = '<ul>';
+    var pg = 0;
     var titleName = data.results.title;
     $.each(data.results, function (i, film) {
+        pg++;
+        console.log(pg);
         filmHTML += '<li class="films">';
         filmHTML += '<h2>' + film.title + '</h2>';
         filmHTML += '</li>';
@@ -93,28 +105,18 @@ let displaySearchFilmResults = function displayFilm(data) {
     
     //Click on title to display overlay, stats and call Spotify
     $('.films').click(function(){
-        /*//Show Overlay
-        $overlay.show();
-        //Get the name of the film that was clicked
-        var filmName = $(this).text();
-        //Make call to film API page
-        var filmURL = 'http://swapi.co/api/films/?search=' + filmName;
-        console.log(filmName);
-        function displayFilmDetails(data) {
-            var results = data.results;
-            filmHTML = '<p>' + results[0].producer + '</p>';
-            $('#overlay').html(filmHTML);
-        }
-        $.getJSON(filmURL, displayFilmDetails);*/
         //Get the name of the film that was clicked
         var filmName = $(this).text();
         showFilmStats(filmName);
         app.init(filmName);
+        
     });//end films.click()
 };
 
 //This function shows just the name of item when 'RANDOM' is clicked
 let displayRandomSearchResults = (name) => {
+    //$('#film_cont').html("");
+    
     nameHTML = '<ul>';
     console.log(searchResource);
     switch (searchResource) {
@@ -143,6 +145,7 @@ let displayRandomSearchResults = (name) => {
     nameHTML += '<h2>' + name.name + '</h2>';
     nameHTML += '</li>';
     nameHTML += '</ul>';
+    
     $('main').html(nameHTML);
     //Click on name to show overlay and display results
     $('.names').click(function () {
@@ -171,24 +174,30 @@ let displayRandomSearchResults = (name) => {
 //to figure out which resource to call
 //This is the function to call when random button is clicked
 let getDataCount = (sr) => {
+    sr = sr.toLowerCase();
     keywordAPI = "http://swapi.co/api/" + sr + "/";
     function displayKeyword(data) {
         //Get number of items to search
         count = data.count;
         console.log(count);
         //Creates a random number based on resource count
-        createRandoNumber(count);
-        console.log(randomPageNum);
+        //createRandoNumber(count);
+        createRandoLetter();
+        console.log(randomLetter);
         //Call function and insert the specific resource to display
-        searchRandoResource(randomPageNum);
+        searchRandoResource(randomLetter);
     }
     $.getJSON(keywordAPI, displayKeyword);
 };
 
 //Gets the selected resource and inserts the random page to search
 let searchRandoResource = (rpn) => {
-    randomAPI = "http://swapi.co/api/" + searchResource + "/" + rpn + "/";
-    $.getJSON(randomAPI, displayRandomSearchResults).fail(function() {
+    searchResource = searchResource.toLowerCase();
+    randomAPI = "http://swapi.co/api/" + searchResource; //+ rpn + "/";
+    randoOptions = {
+        search: rpn
+    }
+    $.getJSON(randomAPI, randoOptions, displaySearchResults).fail(function() {
         $('main').html('<p>Sorry, resource number ' + rpn + ' in ' + searchResource + ' has no information to display.</p>');
   });
 };
@@ -206,6 +215,7 @@ let displayCount = () => {
         keywordHTML += '<h2>In the Star Wars API there are a total of  ' + data.count + '<span class="resource"> ' + searchResource + '</span> to search!</h2>';
         keywordHTML += '</span>';
         keywordHTML += '</div>';
+        $('.resource').html('<img src="..//ripple.svg" alt="">');
         $('#count_cont').html(keywordHTML);
     }
     $.getJSON(keywordAPI, displayKeyword);
@@ -295,8 +305,10 @@ let selectResource = (searchResource) => {
 
 
 $('select').change(() => {
-    displayCount();
     $('main').html('');
+    $('#count_cont').html('<img src="../ripple.svg" alt="">');
+    setTimeout(function() {
+        displayCount();
     $('#search').val('');
     searchResource = $('select option:selected').val();
     if (searchResource === 'Films') {
@@ -305,9 +317,12 @@ $('select').change(() => {
     } else {
         $('#random').show();
     }
+    }, 700);
+    console.log(createRandoLetter());
 });
 $('form').submit((evt) => {
     evt.preventDefault();
+    $('.names').html('<img src="../ellipsis.svg" alt="">');
     searchResource = $('select option:selected').val();
     console.log(searchResource);
     searchValue();//gets input text    
@@ -317,11 +332,12 @@ $('form').submit((evt) => {
 });
 $('#random').click(() => {
     $('main').html('');
+    $('main').html('<img src="../ellipsis.svg" alt="">');
     //Get resource to search
-    searchResource = searchResource.toLowerCase();
+    //searchResource = searchResource.toLowerCase();
     //run function that takes the resource and gets a random number between 1 and however many items are in that resource
     getDataCount(searchResource);
-    console.log(randomPageNum);
+    console.log(randomLetter);
     //searchlooking
 });
 

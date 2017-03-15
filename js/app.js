@@ -1,5 +1,5 @@
 var $,
-    $searchField, $submitButton, peoppleAPI, person, swapiOptions, planetsAPI, planet, displayPlanets, speciesAPI, species, displaySpecies, nameHTML, filmAPI, film, swapiOptionsF, filmHTML, keyword, keywordAPI, swapiOptionsK, keywordHTML, films, filmsHTML, nextText, prevText, randomPageNum, count, randomAPI, planetHTML, planetData, romanID,
+    $searchField, $submitButton, peoppleAPI, person, swapiOptions, planetsAPI, planet, displayPlanets, speciesAPI, species, displaySpecies, nameHTML, filmAPI, film, swapiOptionsF, filmHTML, keyword, keywordAPI, swapiOptionsK, keywordHTML, films, filmsHTML, nextText, prevText, randomPageNum, count, randomAPI, letters, pickLetter, randomLetter, planetHTML, planetData, romanID, nextFilmTitle, prevFilmTitle,
     $searchField = $('#search'),
     $submitButton = $('#submit'),
     $overlay = $('<div id="overlay"><div id="data_cont"></div><div id="film_cont"></div></div>'),
@@ -13,5 +13,5 @@ $overlay.append($closeBtn);
 $(document).ready(function () {
     "use strict";
     $("body").append($overlay);
-    $('input[type=reset]').click(() => {});
+    $('input[type=reset]').click(() => $('main').html(""));
 }); // end ready
