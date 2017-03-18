@@ -4,12 +4,6 @@ let showSpeciesStats = (speciesName) => {
     $overlay.show(function() {
         $('#data_cont').html('<img src="../ripple.svg" alt="">');
     });
-    
-    $closeBtn.click(function (){
-        $overlay.hide();
-        $('#data_cont').html("");
-        $('#film_cont').html("");
-    });
     setTimeout(function() {
     //Get person data
     $.getJSON('http://swapi.co/api/films/', function (filmResponse) {
@@ -63,23 +57,25 @@ let showSpeciesStats = (speciesName) => {
                     if (homePlanet == 'unknown') {
                         speciesHTML += '<h3>It is not documented on which planet ' + speciesData.name + ' was born.</h3>';
                     } else {
-                            speciesHTML += '<p>' + speciesData.name + ' species are from the Planet <span id="homeworld">' + homeworldResponse.name + '</span>.';
+                            speciesHTML += '<p>' + speciesData.name + ' species are from the Planet <span id="homeworld">' + homeworldResponse.name + ' and speak ' + speakLanguage + '</span>.';
                         };
+                    $('#data_cont').html(speciesHTML);
+                    //Click on title to display overlay, stats and call Spotify
+                    $('.film_name').click(function(){
+                        //Get the name of the film that was clicked
+                        var filmName = $(this).text();
+                        showFilmStats(filmName);
+                        app.init(filmName);
+
+                    });//end films.click()
                     $('#data_cont').html(speciesHTML);
                     console.log(homeworldResponse.name);
                 });//End getJSON homeworld
             }); // end each     
             speciesHTML += '</ul>';
             speciesHTML += '</div>';
-            $('#data_cont').html(speciesHTML);
-            //Click on title to display overlay, stats and call Spotify
-            $('.film_name').click(function(){
-                //Get the name of the film that was clicked
-                var filmName = $(this).text();
-                showFilmStats(filmName);
-                app.init(filmName);
-
-            });//end films.click()
+            $('#overlay').show();
+            
         }); // end JSON(peopleResponse)
     }); // end JSON(filmResponse)
     }, 2000);    

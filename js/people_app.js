@@ -4,13 +4,7 @@ let showPeopleStats = (name) => {
     $overlay.show(function() {
         $('#data_cont').html('<img src="../ripple.svg" alt="">');
     });
-    
-    $closeBtn.click(function (){
-        $overlay.hide();
-        $('#data_cont').html("");
-        $('#film_cont').html("");
-    });
-    
+    setTimeout(function() {
     //Get person data
     $.getJSON('http://swapi.co/api/films/', function (filmResponse) {
         var films = filmResponse.results;
@@ -51,7 +45,7 @@ let showPeopleStats = (name) => {
                   mass = Math.floor(mass * 2.20) + 'lbs';  
                 }
                 if(mass === 'unknown') mass = 'not documented';
-                peopleHTML += '<ul class="name">';
+                peopleHTML += '<ul class="name people_stats">';
                 peopleHTML += '<li>Year of Birth: ' + birthday + '</li>';
                 peopleHTML += '<li>Height: ' + height + '</li>';
                 peopleHTML += '<li>Weight: ' + mass + '</li>';
@@ -59,8 +53,9 @@ let showPeopleStats = (name) => {
                 peopleHTML += '<li>Eye Color: ' + peopleData.eye_color + '</li>';
 
                 if(peopleData.films.length){
-                    peopleHTML += '<li><h3>' + name + ' has appeared in:</h3>';
-                    peopleHTML += '<ol class="film_list">';
+                    peopleHTML += '<li>';
+                    peopleHTML += '<h3>' + name + ' has appeared in:</h3>';
+                    peopleHTML += '<ol>';
                     //Loop thru films data
                     $.each(peopleData.films, function(i, filmURL) {
                         for (var c = 0; c < films.length; c++) {
@@ -72,7 +67,9 @@ let showPeopleStats = (name) => {
                             }//end if films match
                         }
                     });//end $.each(filmURL)
-                    peopleHTML += '</ol></li>';
+                    peopleHTML += '</ol>';
+                    peopleHTML += '</li>';
+                    
                 } //end if films have length
                 $.getJSON(peopleData.homeworld, function (homeworldResponse) {
                     var homePlanet = homeworldResponse.name;
@@ -105,14 +102,26 @@ let showPeopleStats = (name) => {
                     }
                     if (species) {
                         peopleHTML += ' ' + gender + ' is from the <span id="species">' + species + ' species.</span> ' + species + 's speak ' + language +  '  ' + lifeSpan + '</p>';
-                        }
+                        };
+                    
                     $('#data_cont').html(peopleHTML);
+                    //Click on title to display overlay, stats and call Spotify
+                    $('.film_name').click(function(){
+                        //Get the name of the film that was clicked
+                        var filmName = $(this).text();
+                        showFilmStats(filmName);
+                        app.init(filmName);
+                    });//end films.click()
                 });//End getJSON species
             }); // end each     
             peopleHTML += '</ul>';
             peopleHTML += '</div>';
             
-            //$('#data_cont').html(peopleHTML);
+            $('#data_cont').html(peopleHTML);
+            $overlay.show();
+            
         }); // end JSON(peopleResponse)
+        
     }); // end JSON(filmResponse)
+    }, 2000);    
 };

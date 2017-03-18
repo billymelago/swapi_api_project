@@ -1,76 +1,72 @@
 //This app displays the character stats for each person in the film
 //This gets displayed in the overlay
 let showFilmStats = (filmTitle) => {
-    $('#data_cont').html("");
-    $overlay.append($closeBtn);
-    $closeBtn.click(function (){
-        $overlay.hide();
-        $('#data_cont').html("");
-        $('#main').html("");
+    $overlay.show(function() {
+        $('#data_cont').html('<img src="../ripple.svg" alt="">');
     });
     //Show Overlay
     $overlay.show();
+    setTimeout(function() {
     let getEpisodeRoman = (episodeID) => {
         switch (episodeID) {
             case 1:
                 romanID = 'I';
-                nextFilTitle = 'Attack of the Clones';//5/
-                prevFilTitle = 'Return of the Jedi';//3/
+                filmLogo = '<img src="../img/Logos/Ep_I_1f2afa8a.jpeg" alt="Movie Logo" width="240px">';
                 break;
             case 2:
                 romanID = 'II';
-                nextFilTitle = "Revenge of the Siths";
-                prevFilTitle = 'The Phantom Menace'; 
-                console.log('nextFilmTitle');
+                filmLogo = '<img src="../img/Logos/Ep_II_1fbf40b5.jpeg" alt="Movie Logo" width="240px">';
                 break;
             case 3:
                 romanID = 'III';
-                nextFilTitle = 'The Force Awakens';//7/
-                prevFilTitle = 'Attack of the Clones';//5/
+                filmLogo = '<img src="../img/Logos/Ep_III_ca924a64.jpeg" alt="Movie Logo" width="240px">';
                 break;
             case 4:
                 romanID = 'IV';
-                nextFilTitle = 'The Empire Strikes Back';//2/
-                prevFilTitle = 'The Force Awakens';//7/
+                filmLogo = '<img src="../img/Logos/Ep_IV_ac00c3f3.jpeg" alt="Movie Logo" width="240px">';
                 break;
             case 5:
                 romanID = 'V';
-                nextFilTitle = 'Return of the Jedi';//3/
-                prevFilTitle = 'A New Hope';//1/
+                filmLogo = '<img src="../img/Logos/Ep_V-4_61ae0512.jpeg" alt="Movie Logo" width="240px">';
                 break;
             case 6:
                 romanID = 'VI';
-                nextFilTitle = 'The Phantom Menace';//4/
-                prevFilTitle = 'The Empire Strikes Back';//2/
+                filmLogo = '<img src="../img/Logos/Ep_VI_58826fba.jpeg" alt="Movie Logo" width="240px">';
                 break;
             case 7:
                 romanID = 'VII';
-                nextFilTitle = 'A New Hope';//1/
-                prevFilTitle = 'Revenge of the Siths';//6/
+                filmLogo = '<img src="../img/Logos/ep_vii_logo_a87c8864.png" alt="Movie Logo" width="240px">';
                 break;    
             default:
                 alert("Sorry we can't find what you're searching for.");
         }
     };
+        
         //Make call to film API page
         let filmURL = 'http://swapi.co/api/films/?search=' + filmTitle;
         console.log(filmTitle);
         function displayFilmDetails(data) {
             let results = data.results;
-            filmHTML = '<p>' + filmTitle + ' </p>';
-            filmHTML += '<ul>';
+            console.log(results);
+            filmHTML = '<p>Film Title: ' + filmTitle + ' </p>';
+            filmHTML += '<ul id="data_cont_head">';
             $.each(results, function (i, name) {
                 console.log(name.episode_id);
                 getEpisodeRoman(name.episode_id);
                 
                 filmHTML += '<li class="names film_title">';
-                filmHTML += '<h2>Star Wars, Episode ' + romanID + ': ' + name.title + '</h2>';
+                filmHTML += filmLogo + '<h2>Star Wars, Episode ' + romanID + ': ' + name.title + '</h2>';
                 filmHTML += '<p>Release Date, ' + name.release_date + '.  Directed by ' + name.director  + ' and Produced by ' + name.producer + '.</p>';
-                filmHTML += '<div id="opening_crawl"><p>' + name.opening_crawl + '</p></div>';
+                filmHTML += '<div id="opening_crawl"><div id="crawl_content"><p>' + name.opening_crawl + '</p></div></div>';
                 filmHTML += '</li>';
                 
             }); // end each
             $('#data_cont').html(filmHTML);
+            /*$('#opening_crawl p').animate({
+                opacity: 0,
+                top: "-1200px"
+            }, 38000);*/
         }
         $.getJSON(filmURL, displayFilmDetails);
+        }, 2000);  
 };

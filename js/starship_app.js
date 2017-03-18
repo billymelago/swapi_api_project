@@ -4,24 +4,19 @@ let showStarshipStats = (starshipName) => {
     $overlay.show(function() {
         $('#data_cont').html('<img src="../ripple.svg" alt="">');
     });
-    
-    $closeBtn.click(function (){
-        $overlay.hide();
-        $('#data_cont').html("");
-        $('#film_cont').html("");
-    });
     setTimeout(function() {
     //Get person data
     $.getJSON('http://swapi.co/api/films/', function (filmResponse) {
         var films = filmResponse.results;
         //Get People data
         $.getJSON('http://swapi.co/api/starships/?search=' + starshipName, function (starshipResponse) {
-            var data = starshipResponse;
+            var starData = starshipResponse.results[0];
+            console.log(starData);
             var model, starshipClass, manufacturer, cost, length, crew, passengers, atmosphericSpeed, hyperdrive, MGLT, cargo, consumables;
             var starHTML = '<p>Information for the ' + starshipName + '</p>';
-            starHTML += '<h2>' + data.results[0].name + '</h2>';
-            starHTML += '<div>';
-            $.each(data.results, function (i, starData) {
+            starHTML += '<h2>' + starData.name + '</h2>';
+            starHTML += '<div id="data_stats_cont">';
+            //$.each(data, function (i, starData) {
                 model = starData.model;
                 starshipClass = starData.starship_class;
                 manufacturer = starData.manufacturer;
@@ -49,8 +44,8 @@ let showStarshipStats = (starshipName) => {
                 starHTML += '<li>Consumables Supply: ' + consumables + '</li>';
 
                 if(starData.films.length){
-                    starHTML += '<li><h3>The ' + starshipName + ' has appeared in:</h3>';
-                    starHTML += '<ol>';
+                    starHTML += '<li><h3>The ' + starshipName + ' has appeared in:</h3></li>';
+                    starHTML += '<li><ol>';
                     //Loop thru films data
                     $.each(starData.films, function(i, filmURL) {
                         for (var c = 0; c < films.length; c++) {
@@ -64,7 +59,7 @@ let showStarshipStats = (starshipName) => {
                     });//end $.each(filmURL)
                     starHTML += '</ol></li>';
                 } //end if films have length
-            }); // end each     
+            //}); // end each     
             starHTML += '</ul>';
             starHTML += '</div>';
             $('#data_cont').html(starHTML);

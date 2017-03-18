@@ -4,12 +4,6 @@ let showvehicleStats = (vehicleName) => {
     $overlay.show(function() {
         $('#data_cont').html('<img src="../ripple.svg" alt="">');
     });
-    
-    $closeBtn.click(function (){
-        $overlay.hide();
-        $('#data_cont').html("");
-        $('#film_cont').html("");
-    });
     setTimeout(function() {
     //Get person data
     $.getJSON('http://swapi.co/api/films/', function (filmResponse) {
@@ -34,7 +28,7 @@ let showvehicleStats = (vehicleName) => {
                 MGLT = starData.MGLT;
                 cargo = starData.cargo_capacity;
                 consumables = starData.consumables;
-                starHTML += '<ul class="star_stats">';
+                starHTML += '<ul class="vehicles_stats">';
                 starHTML += '<li>Official Name: ' + model + '</li>';
                 starHTML += '<li>Vehicle Class: ' + vehicleClass + '</li>';
                 starHTML += '<li>Manufactured by: ' + manufacturer + '</li>';

@@ -4,12 +4,6 @@ let showPlanetsStats = (name) => {
     $overlay.show(function() {
         $('#data_cont').html('<img src="../ripple.svg" alt="">');
     });
-    
-    $closeBtn.click(function (){
-        $overlay.hide();
-        $('#data_cont').html("");
-        $('#film_cont').html("");
-    });
     setTimeout(function() {
     //Get person data
     $.getJSON('http://swapi.co/api/films/', function (filmResponse) {
@@ -20,7 +14,7 @@ let showPlanetsStats = (name) => {
             var rotation, orbit, diameter, climate, gravity, terrain, water, population;
             var planetHTML = '<p>Information for the Planet: ' + name + '</p>';
             planetHTML += '<h2>' + data.results[0].name + '</h2>';
-            planetHTML += '<div>';
+            planetHTML += '<div class="planets_stats">';
             
             $.each(data.results, function (i, planetData) {
                 rotation = planetData.rotation_period;

@@ -3,7 +3,6 @@ let searchResource = $('select option:selected').val();
 
 let searchValue = () =>{
     keyword = $('#search').val().toLowerCase();
-    
 };
 
 let createRandoNumber = (x) =>{
@@ -31,7 +30,8 @@ let searchFound = () => {
 //This function shows just the name of item searched
 let displaySearchResults = function display(data) {
     $('#film_cont').html("");
-    nameHTML = '<ul>';
+    nameHTML = '<h4>Click an item for more info.</h4>';
+    nameHTML += '<ul id="display_search_results">';
     $.each(data.results, function (i, name) {
         searchResource = searchResource.toLowerCase();
         //nameHTML += '<li class="names">';
@@ -52,13 +52,13 @@ let displaySearchResults = function display(data) {
             nameHTML += '<li class="vehicles">';
             break;
         case 'films':
-            $('#random').hide();
+                $('#search').val('');
             searchFilms();
             break;    
         default:
             alert("Sorry we can't find what you're searching for.");
     }
-        nameHTML += '<h2>' + name.name + '</h2>';
+        nameHTML += name.name;
         nameHTML += '</li>';
     }); // end each
     nameHTML += '</ul>';
@@ -89,12 +89,9 @@ let displaySearchResults = function display(data) {
 //Function called when a film is searched
 //It doesn't have a name attr have to use title
 let displaySearchFilmResults = function displayFilm(data) {
-    filmHTML = '<ul>';
-    var pg = 0;
+    filmHTML = '<ul class="main_films_list">';
     var titleName = data.results.title;
     $.each(data.results, function (i, film) {
-        pg++;
-        console.log(pg);
         filmHTML += '<li class="films">';
         filmHTML += '<h2>' + film.title + '</h2>';
         filmHTML += '</li>';
@@ -116,8 +113,8 @@ let displaySearchFilmResults = function displayFilm(data) {
 //This function shows just the name of item when 'RANDOM' is clicked
 let displayRandomSearchResults = (name) => {
     //$('#film_cont').html("");
-    
-    nameHTML = '<ul>';
+    nameHTML = '<h4>Click an item for more info.</h4>';
+    nameHTML += '<ul>';
     console.log(searchResource);
     switch (searchResource) {
         case 'people':
@@ -136,7 +133,7 @@ let displayRandomSearchResults = (name) => {
             nameHTML += '<li class="vehicles">';
             break;
         case 'films':
-            $('#random').hide();
+            $('#search').val('');
             searchFilms();
             break;    
         default:
@@ -212,7 +209,7 @@ let displayCount = () => {
     function   displayKeyword(data) {
         keywordHTML = '<div id="count">';
         keywordHTML += '<span class="keyword">';
-        keywordHTML += '<h2>In the Star Wars API there are a total of  ' + data.count + '<span class="resource"> ' + searchResource + '</span> to search!</h2>';
+        keywordHTML += '<h2>In the Star Wars API there are a total of <span class="resource"> ' + data.count + ' ' + searchResource + '</span> to search!</h2>';
         keywordHTML += '</span>';
         keywordHTML += '</div>';
         $('.resource').html('<img src="..//ripple.svg" alt="">');
@@ -271,10 +268,8 @@ let searchVehicles = () => {
 // the AJAX films part
 let searchFilms = () => {
     filmAPI = "http://swapi.co/api/films/";
-    swapiOptions = {
-        search: keyword
-    };
-    $.getJSON(filmAPI, swapiOptions, displaySearchFilmResults);
+    
+    $.getJSON(filmAPI, displaySearchFilmResults);
 }; 
 
 let selectResource = (searchResource) => {
@@ -295,7 +290,7 @@ let selectResource = (searchResource) => {
             searchVehicles();
             break;
         case 'Films':
-            $('#random').hide();
+            $('#search').val('');
             searchFilms();
             break;    
         default:
@@ -305,18 +300,17 @@ let selectResource = (searchResource) => {
 
 
 $('select').change(() => {
+    $('#search').val('');
     $('main').html('');
     $('#count_cont').html('<img src="../ripple.svg" alt="">');
     setTimeout(function() {
         displayCount();
-    $('#search').val('');
-    searchResource = $('select option:selected').val();
-    if (searchResource === 'Films') {
-        $('#random').hide();
-        searchFilms()
-    } else {
-        $('#random').show();
-    }
+        $('#search').val('');
+        searchResource = $('select option:selected').val();
+        if (searchResource === 'Films') {
+            $('main').html('');
+            searchFilms()
+        }
     }, 700);
     console.log(createRandoLetter());
 });
@@ -329,8 +323,10 @@ $('form').submit((evt) => {
     searchLooking();//loader
     selectResource(searchResource);
     searchFound();
+    $('#search').val('');
 });
 $('#random').click(() => {
+    $('#search').val('');
     $('main').html('');
     $('main').html('<img src="../ellipsis.svg" alt="">');
     //Get resource to search
@@ -339,5 +335,6 @@ $('#random').click(() => {
     getDataCount(searchResource);
     console.log(randomLetter);
     //searchlooking
+    
 });
 

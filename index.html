@@ -2,6 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Star Wars Data Search</title>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css" rel="stylesheet" type="text/css">    
   <link href='http://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
@@ -11,38 +12,47 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 </head>
 <body>
+    
     <div class="main_cont">
         <header>
-            <h1>Star Wars Data Search</h1>
-        </header>    
-        <nav>
-            <span class="the_films"><p>Search through all resources by typing a specific name into the search box or click the random button to get a random list of the selected resource. </p></span>
-        </nav>
+            <img src="img/sw_logo_hor.png" alt="Logo">
+            <h1>Data Search</h1>
+        </header> 
         
         <section>
-            <form id="swapiSearchForm">
-                <select required>
-                    <option value="">Resources</option>
-                    <option value="Films">Films</option>
-                    <option value="People">People</option>
-                    <option value="Starships">Starships</option>
-                    <option value="Planets">Planets</option>
-                    <option value="Species">Species</option>
-                    <option value="Vehicles">Vehicles</option>
-                </select>
-                <label for="search">Type a search term</label>
-                <input type="search" name="search" id="search" placeholder="Enter specific resource" required>
-                <input type="submit" value="Search" id="submit">
-                <input type="reset">
-                <button type="button" id="random">Random</button>
+            <form action="#" method="get" id="swapi_search_form">
+                <fieldset>
+                    <legend>Data Search</legend>
+                    <label for="resource_select">Select a resource to search.</label>
+                    <select name="resource" id="resource_select" required>
+                        <option selected value="">Select A Resource</option> 
+                            <option value="Films">Films</option>
+                            <option value="People">People</option>
+                            <option value="Starships">Starships</option>
+                            <option value="Planets">Planets</option>
+                            <option value="Species">Species</option>
+                            <option value="Vehicles">Vehicles</option>
+                    </select>
+                    <label for="random">Click for a</label>
+                    <button type="button" id="random">Random List</button>
+                    <label for="search">Enter a specific name to search</label>
+                    <input type="search" name="search" id="search" placeholder="Enter specific resource" required>
+                    <input type="submit" value="Search" id="submit">
+                    <label for="reset">Reset form</label>
+                    <input type="reset" id="reset">
+                </fieldset>
             </form>
-            <h4 id="count_cont"></h4>
+            <span id="count_cont"></span>
         </section>
-        <main>
-            
-        </main>
-    </div>
-    <!--<div class="loader_cont loader"><img class="loader_icon" src="ripple.svg" alt=""></div>-->
+        
+        <main></main>
+        
+    </div><!--End .main_cont-->
+    
+    <footer>
+        <small>All product names, logos, and brands are property of their respective owners. All company, product and service names used in this website are for identification purposes only. Use of these names, logos, and brands does not imply endorsement.</small>
+    </footer>
+    
     <script src="js/app.js"></script>   
     <script src="js/people_app.js"></script> 
     <script src="js/planets_app.js"></script>
