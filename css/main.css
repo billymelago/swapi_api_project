@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css?family=Droid+Sans');
 * {
     list-style: none;
     box-sizing: border-box;
@@ -21,6 +22,7 @@ body {
     text-align: center;
     padding: 1.2em;
     background-image: url(../img/home_bkg.jpg);
+    font-family: 'Droid Sans', sans-serif;
 }
 
 img {
@@ -60,7 +62,7 @@ legend {
 }
 
 fieldset, form  {
-    max-width: 640px;
+    max-width: 740px;
     border: none;
 }
 
@@ -105,11 +107,12 @@ main {
 }
 
 main li {
-    -webkit-transition: 1.2s all;
-    transition: 1.2s all;
+    -webkit-transition: .2s all ease-in;
+    transition: .2s all ease-in;
 }
 
 main li:hover {
+    cursor: pointer;
     color: #fff;
     text-shadow: 0px 0px 12px #ffd54e, 0px 0px 15px #39FF14;
 }
@@ -148,9 +151,10 @@ main li:hover {
     flex-grow: 1;
     -ms-flex-preferred-size: 1em;
     padding: .4em;
-    font-size: 1.8em;
+    font-size: 1.5em;
+    color: #39FF14;
     -ms-flex-preferred-size: 216px;
-    flex-basis: 266px;
+    flex-basis: 216px;
 }
 
 .main_films_list {
@@ -165,7 +169,8 @@ main li:hover {
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
     flex-flow: row wrap;
-    font-size: 1em;
+    font-size: .85em;
+    color: #39FF14;
 }
 .films {
     -webkit-box-flex: 1;
@@ -173,7 +178,7 @@ main li:hover {
     flex-grow: 1;
     -ms-flex-preferred-size: 220px;
     flex-basis: 220px;
-    padding: .2em;
+    padding: .1em;
 }
 
 
@@ -237,7 +242,43 @@ main li:hover {
     background: rgba(0,0,0,.4);
     max-width: 640px;
     margin: 0 auto;
-    padding: 0;
+    padding: 1.2em 0;
+}
+#data_cont h2 {
+    color: #ffd54e;
+    margin: 0;
+}
+#data_stats_cont li {
+    padding: .5em;
+    
+}
+#data_cont h3 {
+    text-align: center;
+    margin-bottom: -.1em;
+    color: #ffd54e; 
+    padding-bottom: 0.2em;
+    
+}
+#data_stats_cont ol {
+    margin-top: 0.4em;
+    text-align: center;
+    font-size: 1.2em;
+    padding-left: 0;
+}
+#data_stats_cont ol li {
+    padding: 0.4em;
+    -webkit-transition: 1.2s all;
+    -webkit-transition: .6s all;
+    transition: .6s all;
+    cursor: pointer;
+    color: #39FF14;
+}
+#data_stats_cont ol li:hover {
+    color: #fff;
+    text-shadow: 0px 0px 12px #ffd54e, 0px 0px 15px #39FF14;
+}
+#homeworld {
+    color: #39FF14;
 }
 
 #data_stats_cont {
@@ -262,7 +303,7 @@ main li:hover {
     background-repeat: no-repeat;
 }
 .people_stats:after {
-    background-image: url('https://lumiere-a.akamaihd.net/v1/images/open-uri20150608-27674-xcgpqj_adf71e29.jpeg?region=0%2C0%2C1280%2C858');
+    background-image: url('https://lumiere-a.akamaihd.net/v1/images/Count-Dooku_4f552149.jpeg?region=0%2C0%2C1436%2C808&width=768');
     opacity: 0.5;
 }
 
@@ -289,6 +330,7 @@ main li:hover {
 
 .film_title {
     background-color: #151515;
+    background-color: rgba(0,0,0,.8);
     margin: 0 auto;
     font-size: .65em;
     padding: .50em;
@@ -549,12 +591,12 @@ label {
 
 
 .pushed .toggle-icon:hover .bar:nth-of-type(2) {
-    z-index: 120008;
+    z-index: 12008;
 	border-right-color: #e9b8b9;
 	box-shadow: 0.4em 0 0.6em 0.1em rgba(205,40,44,0.75);
 }
 .pushed .toggle-icon:hover .bar:nth-of-type(3) {
-    z-index: 120008;
+    z-index: 12008;
 	border-right-color: #ddf1da;
 	box-shadow: 0.4em 0 0.6em 0.1em rgba(83,228,68,0.65);
 }

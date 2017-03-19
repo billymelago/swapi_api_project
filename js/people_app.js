@@ -15,7 +15,7 @@ let showPeopleStats = (name) => {
             console.log(name);
             var peopleHTML = '<p>Character stats for: ' + name + '</p>';
             peopleHTML += '<h2>' + data.results[0].name + '</h2>';
-            peopleHTML += '<div>';
+            peopleHTML += '<div id="data_stats_cont">';
             $.each(data.results, function (i, peopleData) {
                 gender = peopleData.gender;
                 if (gender === 'male') {

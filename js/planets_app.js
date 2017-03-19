@@ -14,7 +14,7 @@ let showPlanetsStats = (name) => {
             var rotation, orbit, diameter, climate, gravity, terrain, water, population;
             var planetHTML = '<p>Information for the Planet: ' + name + '</p>';
             planetHTML += '<h2>' + data.results[0].name + '</h2>';
-            planetHTML += '<div class="planets_stats">';
+            planetHTML += '<div id="data_stats_cont">';
             
             $.each(data.results, function (i, planetData) {
                 rotation = planetData.rotation_period;
@@ -25,7 +25,7 @@ let showPlanetsStats = (name) => {
                 terrain = planetData.terrain;
                 water = planetData.surface_water;
                 population = planetData.population;
-                planetHTML += '<ul class="planet_stats">';
+                planetHTML += '<ul class="planets_stats">';
                 planetHTML += '<li>Rotation Period: ' + rotation + '</li>';
                 planetHTML += '<li>Orbital Period: ' + orbit + '</li>';
                 planetHTML += '<li>Planet Diameter: ' + diameter + '</li>';

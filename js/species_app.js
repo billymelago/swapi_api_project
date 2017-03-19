@@ -14,7 +14,7 @@ let showSpeciesStats = (speciesName) => {
             var speciesClass, designation, height, skinColors, hairColors, eyeColors, averageLife, speakLanguage;
             var speciesHTML = '<p>Information for the ' + speciesName + ' Species</p>';
             speciesHTML += '<h2>' + data.results[0].name + '</h2>';
-            speciesHTML += '<div>';
+            speciesHTML += '<div id="data_stats_cont">';
             $.each(data.results, function (i, speciesData) {
                 speciesClass = speciesData.classification;
                 designated = speciesData.designation;
@@ -36,7 +36,7 @@ let showSpeciesStats = (speciesName) => {
                 
 
                 if(speciesData.films.length){
-                    speciesHTML += '<li><h3>The ' + speciesName + ' species has appeared in:</h3>';
+                    speciesHTML += '<li><h3>The ' + speciesName + ' species have appeared in:</h3>';
                     speciesHTML += '<ol>';
                     //Loop thru films data
                     $.each(speciesData.films, function(i, filmURL) {

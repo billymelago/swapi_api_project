@@ -14,7 +14,7 @@ let showvehicleStats = (vehicleName) => {
             var model, vehicleClass, manufacturer, cost, length, crew, passengers, atmosphericSpeed, cargo, consumables;
             var starHTML = '<p>Information for the ' + vehicleName + '</p>';
             starHTML += '<h2>' + data.results[0].name + '</h2>';
-            starHTML += '<div>';
+            starHTML += '<div id="data_stats_cont">';
             $.each(data.results, function (i, starData) {
                 model = starData.model;
                 vehicleClass = starData.vehicle_class;
@@ -29,7 +29,7 @@ let showvehicleStats = (vehicleName) => {
                 cargo = starData.cargo_capacity;
                 consumables = starData.consumables;
                 starHTML += '<ul class="vehicles_stats">';
-                starHTML += '<li>Official Name: ' + model + '</li>';
+                starHTML += '<li>Official Name:</h4> ' + model + '</li>';
                 starHTML += '<li>Vehicle Class: ' + vehicleClass + '</li>';
                 starHTML += '<li>Manufactured by: ' + manufacturer + '</li>';
                 starHTML += '<li>Cost in Galactic Credits: ' + cost + '</li>';
