@@ -48,7 +48,7 @@ app.buildPlaylist = function(albumURI) {
         .then($('.loader').show())
         .then((albumURI) => {
             
-            $('#cover_art').append(`<div class="loader_cont loader"><img class="loader_icon" src="ripple.svg" alt=""></div>`);
+            $('#cover_art').append(`<div class="loader_cont loader"><img class="loader_icon" src="../img/ripple.svg" alt=""></div>`);
        
             const baseUrl = `https://embed.spotify.com/?uri=${albumURI}`;
             $('#film_cont').append(`<div id="soundtrack"><iframe src="${baseUrl}" width="200" height="300" frameborder="0" allowtransparency="true"></iframe></div>`);

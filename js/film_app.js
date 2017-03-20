@@ -2,7 +2,7 @@
 //This gets displayed in the overlay
 let showFilmStats = (filmTitle) => {
     $overlay.show(function() {
-        $('#data_cont').html('<img src="../ripple.svg" alt="">');
+        $('#data_cont').html('<img src="../img/ripple.svg" alt="">');
     });
     //Show Overlay
     $overlay.show();

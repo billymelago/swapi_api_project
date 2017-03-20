@@ -22,7 +22,7 @@ body {
     text-align: center;
     padding: 1.2em;
     background-image: url(../img/home_bkg.jpg);
-    font-family: 'Droid Sans', sans-serif;
+    font-family: 'Droid Serif', serif;
 }
 
 img {
@@ -67,6 +67,7 @@ fieldset, form  {
 }
 
 input, select, label {
+    font-style: bold;
     padding: .2em;
     border-radius: 4px;
     -webkit-box-flex: 1;
@@ -79,6 +80,12 @@ button {
     border-radius: 8px;
     display: block;
     margin: 0 auto;
+    color: #000;
+    background: #39FF14;
+}
+#reset {
+    color: #000;
+    background: #ffd54e;
 }
 
 label {
@@ -207,7 +214,7 @@ main li:hover {
     background: rgba(4,4,4,.8);
     width: 100%;
     height: 100%;
-    overflow: auto;
+    overflow-x: hidden;
     position: fixed;
     padding: 20px;
     top: 0;
@@ -363,7 +370,7 @@ main li:hover {
 }
 
 #soundtrack, #cover_art {
-    background-image: url(../ellipsis.svg);
+    background-image: url(../img/ellipsis.svg);
     background-repeat: no-repeat;
     background-position: center;
 }
