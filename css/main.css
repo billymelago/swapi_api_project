@@ -359,7 +359,7 @@ main li:hover {
     -ms-flex-align: center;
     align-items: center;
     background-image: -webkit-linear-gradient(top, rgba(0,0,0,1) 0%, transparent 100%);
-    background-color: linear-gradient(top, rgba(0,0,0,1) 0%, transparent 100%);
+    background-image: linear-gradient(top, rgba(0,0,0,1) 0%, transparent 100%);
 }
 
 #soundtrack, #cover_art {
@@ -427,10 +427,6 @@ label {
     iframe {
         height: 120px;
     }
-    #overlay {
-        overflow: none;
-    }
-    
     @-webkit-keyframes intro {
         0% { opacity: 1; -webkit-transform: scale(1); transform: scale(1); }
         90% { opacity: 1; -webkit-transform: scale(0.5); transform: scale(1); }
