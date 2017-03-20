@@ -247,7 +247,7 @@ main li:hover {
     background: rgba(0,0,0,.4);
     max-width: 640px;
     margin: 0 auto;
-    padding: 1.2em 0;
+    padding: 0;
 }
 #data_cont h2 {
     color: #ffd54e;
@@ -349,7 +349,7 @@ main li:hover {
     left: 0;
     right: 0;
     margin: 0 auto;
-    padding: .40em 0 5em;
+    padding: 1.20em 0 5em;
     max-width: 640px;
     display: -webkit-box;
     display: -ms-flexbox;
@@ -484,7 +484,7 @@ label {
     line-height: 2;
     font-size: 1.5em;
     color: #ffd54e;
-    -webkit-animation: scroll 100s linear 1s infinite;
+    -webkit-animation: scroll 100s linear 0s infinite;
     animation: scroll 100s linear 0s infinite;
 }
 
