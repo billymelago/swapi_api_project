@@ -212,7 +212,7 @@ let displayCount = () => {
         keywordHTML += '<h2>In the Star Wars API there are a total of <span class="resource"> ' + data.count + ' ' + searchResource + '</span> to search!</h2>';
         keywordHTML += '</span>';
         keywordHTML += '</div>';
-        $('.resource').html('<img src="..//ripple.svg" alt="">');
+        $('.resource').html('<img src="../img/ripple.svg" alt="">');
         $('#count_cont').html(keywordHTML);
     }
     $.getJSON(keywordAPI, displayKeyword);

@@ -11,31 +11,31 @@ let showFilmStats = (filmTitle) => {
         switch (episodeID) {
             case 1:
                 romanID = 'I';
-                filmLogo = '<img src="img/Logos/Ep_I_1f2afa8a.jpeg" alt="Movie Logo" width="240px">';
+                filmLogo = '<img src="../img/Logos/Ep_I_1f2afa8a.jpeg" alt="Movie Logo" width="240px">';
                 break;
             case 2:
                 romanID = 'II';
-                filmLogo = '<img src="img/Logos/Ep_II_1fbf40b5.jpeg" alt="Movie Logo" width="240px">';
+                filmLogo = '<img src="../img/Logos/Ep_II_1fbf40b5.jpeg" alt="Movie Logo" width="240px">';
                 break;
             case 3:
                 romanID = 'III';
-                filmLogo = '<img src="img/Logos/Ep_III_ca924a64.jpeg" alt="Movie Logo" width="240px">';
+                filmLogo = '<img src="../img/Logos/Ep_III_ca924a64.jpeg" alt="Movie Logo" width="240px">';
                 break;
             case 4:
                 romanID = 'IV';
-                filmLogo = '<img src="img/Logos/Ep_IV_ac00c3f3.jpeg" alt="Movie Logo" width="240px">';
+                filmLogo = '<img src="../img/Logos/Ep_IV_ac00c3f3.jpeg" alt="Movie Logo" width="240px">';
                 break;
             case 5:
                 romanID = 'V';
-                filmLogo = '<img src="img/Logos/Ep_V-4_61ae0512.jpeg" alt="Movie Logo" width="240px">';
+                filmLogo = '<img src="../img/Logos/Ep_V-4_61ae0512.jpeg" alt="Movie Logo" width="240px">';
                 break;
             case 6:
                 romanID = 'VI';
-                filmLogo = '<img src="img/Logos/Ep_VI_58826fba.jpeg" alt="Movie Logo" width="240px">';
+                filmLogo = '<img src="../img/Logos/Ep_VI_58826fba.jpeg" alt="Movie Logo" width="240px">';
                 break;
             case 7:
                 romanID = 'VII';
-                filmLogo = '<img src="img/Logos/ep_vii_logo_a87c8864.png" alt="Movie Logo" width="240px">';
+                filmLogo = '<img src="../img src="img/Logos/ep_vii_logo_a87c8864.png" alt="Movie Logo" width="240px">';
                 break;    
             default:
                 alert("Sorry we can't find what you're searching for.");

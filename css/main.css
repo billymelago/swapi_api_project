@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css?family=Droid+Sans');
 * {
     list-style: none;
     box-sizing: border-box;
@@ -67,7 +66,6 @@ fieldset, form  {
 }
 
 input, select, label {
-    font-style: bold;
     padding: .2em;
     border-radius: 4px;
     -webkit-box-flex: 1;
@@ -365,8 +363,8 @@ main li:hover {
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
-    background-image: -webkit-linear-gradient(top, rgba(0,0,0,1) 0%, transparent 100%);
-    background-image: linear-gradient(top, rgba(0,0,0,1) 0%, transparent 100%);
+    background: -webkit-linear-gradient(rgba(0,0,0,1) 0%, transparent 100%);
+    background: linear-gradient(rgba(0,0,0,1) 0%, transparent 100%);
 }
 
 #soundtrack, #cover_art {
@@ -428,6 +426,7 @@ label {
     max-width: 250px;
     margin: 0 auto;
 }
+}
     
     
     
@@ -446,8 +445,7 @@ label {
         100% { opacity: 0; -webkit-transform: scale(0.1); transform: scale(0.5); }
     }
     
-    }
-
+   
 #opening_crawl {
     z-index: -1;
     position: absolute;
@@ -475,8 +473,8 @@ label {
     right: 0;
     top: 0;
     bottom: 60%;
-    background-image: -webkit-linear-gradient(top, rgba(0,0,0,1) 0%, transparent 100%);
-    background-image: linear-gradient(top, rgba(0,0,0,1) 0%, transparent 100%);
+    background: -webkit-linear-gradient(rgba(0,0,0,1) 0%, transparent 100%);
+    background: linear-gradient(rgba(0,0,0,1) 0%, transparent 100%);
     pointer-events: none;
 }
 
