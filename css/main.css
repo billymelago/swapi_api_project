@@ -182,7 +182,7 @@ main li:hover {
     -ms-flex-positive: 1;
     flex-grow: 1;
     -ms-flex-preferred-size: 220px;
-    flex-basis: 220px;
+    flex-basis: 275px;
     padding: .1em;
 }
 
