@@ -35,7 +35,7 @@ let showFilmStats = (filmTitle) => {
                 break;
             case 7:
                 romanID = 'VII';
-                filmLogo = '<img src="../img src="img/Logos/ep_vii_logo_a87c8864.png" alt="Movie Logo" width="240px">';
+                filmLogo = '<img src="../img/Logos/ep_vii_logo_a87c8864.png" alt="Movie Logo" width="240px">';
                 break;    
             default:
                 alert("Sorry we can't find what you're searching for.");

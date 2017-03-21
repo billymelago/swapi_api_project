@@ -426,13 +426,14 @@ label {
     max-width: 250px;
     margin: 0 auto;
 }
+    iframe {
+        height: 120px;
+    }    
 }
     
     
     
-    iframe {
-        height: 120px;
-    }
+
     @-webkit-keyframes intro {
         0% { opacity: 1; -webkit-transform: scale(1); transform: scale(1); }
         90% { opacity: 1; -webkit-transform: scale(0.5); transform: scale(1); }
