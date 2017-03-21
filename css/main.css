@@ -409,7 +409,7 @@ main li:hover {
 /**********************Animate Opening Crawl**********************/
 
 
-@media screen and (max-width: 420px) {
+@media screen and (max-width: 400px) {
     input, button, select {
     display: block;
     padding: .2em;
