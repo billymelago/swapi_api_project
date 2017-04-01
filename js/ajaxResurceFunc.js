@@ -316,7 +316,7 @@ $('select').change(() => {
 });
 $('form').submit((evt) => {
     evt.preventDefault();
-    $('.names').html('<img src="/img/ellipsis.svg" alt="">');
+    $('.names').html('<img src="./img/ellipsis.svg" alt="">');
     searchResource = $('select option:selected').val();
     console.log(searchResource);
     searchValue();//gets input text    
@@ -328,7 +328,7 @@ $('form').submit((evt) => {
 $('#random').click(() => {
     $('#search').val('');
     $('main').html('');
-    $('main').html('<img src="/img/ellipsis.svg" alt="">');
+    $('main').html('<img src="./img/ellipsis.svg" alt="">');
     //Get resource to search
     //searchResource = searchResource.toLowerCase();
     //run function that takes the resource and gets a random number between 1 and however many items are in that resource
