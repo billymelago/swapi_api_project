@@ -302,7 +302,7 @@ let selectResource = (searchResource) => {
 $('select').change(() => {
     $('#search').val('');
     $('main').html('');
-    $('#count_cont').html('<img src="/img/ripple.svg" alt="">');
+    $('#count_cont').html('<img src="./img/ripple.svg" alt="">');
     setTimeout(function() {
         displayCount();
         $('#search').val('');
