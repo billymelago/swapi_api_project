@@ -172,7 +172,7 @@ let displayRandomSearchResults = (name) => {
 //This is the function to call when random button is clicked
 let getDataCount = (sr) => {
     sr = sr.toLowerCase();
-    keywordAPI = "http://swapi.co/api/" + sr + "/";
+    keywordAPI = "https://swapi.co/api/" + sr + "/";
     function displayKeyword(data) {
         //Get number of items to search
         count = data.count;
@@ -190,7 +190,7 @@ let getDataCount = (sr) => {
 //Gets the selected resource and inserts the random page to search
 let searchRandoResource = (rpn) => {
     searchResource = searchResource.toLowerCase();
-    randomAPI = "http://swapi.co/api/" + searchResource; //+ rpn + "/";
+    randomAPI = "https://swapi.co/api/" + searchResource; //+ rpn + "/";
     randoOptions = {
         search: rpn
     }
@@ -205,14 +205,14 @@ let searchRandoResource = (rpn) => {
 let displayCount = () => {
     searchResource = $('select option:selected').val();
     searchResource = searchResource.toLowerCase();
-    keywordAPI = "http://swapi.co/api/" + searchResource + "/";
+    keywordAPI = "https://swapi.co/api/" + searchResource + "/";
     function   displayKeyword(data) {
         keywordHTML = '<div id="count">';
         keywordHTML += '<span class="keyword">';
         keywordHTML += '<h2>In the Star Wars API there are a total of <span class="resource"> ' + data.count + ' ' + searchResource + '</span> to search!</h2>';
         keywordHTML += '</span>';
         keywordHTML += '</div>';
-        $('.resource').html('<img src="../img/ripple.svg" alt="">');
+        $('.resource').html('<img src="/img/ripple.svg" alt="">');
         $('#count_cont').html(keywordHTML);
     }
     $.getJSON(keywordAPI, displayKeyword);
@@ -222,7 +222,7 @@ let displayCount = () => {
 //Functions to call when the 'SEARCH' button is clicked
 // the AJAX People part, searches the people API for a character name
 let searchPeople = () => {
-    peoppleAPI = "http://swapi.co/api/people/";
+    peoppleAPI = "https://swapi.co/api/people/";
     swapiOptions = {
         search: keyword
     };
@@ -231,7 +231,7 @@ let searchPeople = () => {
 
 // the AJAX Planets part, searches the planet API for a planet name
 let searchPlanet = () => {
-    planetsAPI = "http://swapi.co/api/planets/";
+    planetsAPI = "https://swapi.co/api/planets/";
     swapiOptions = {
         search: keyword
     };
@@ -240,7 +240,7 @@ let searchPlanet = () => {
 
 // the AJAX Species part, searches the species API for a species type
 let searchSpecies = () => {
-    speciesAPI = "http://swapi.co/api/species/";
+    speciesAPI = "https://swapi.co/api/species/";
     swapiOptions = {
         search: keyword
     };
@@ -249,7 +249,7 @@ let searchSpecies = () => {
 
 // the AJAX Starships part, searches the starships API for a starships name
 let searchStarships = () => {
-    starshipsAPI = "http://swapi.co/api/starships/";
+    starshipsAPI = "https://swapi.co/api/starships/";
     swapiOptions = {
         search: keyword
     };
@@ -258,7 +258,7 @@ let searchStarships = () => {
 
 // the AJAX Starships part, searches the starships API for a starships name
 let searchVehicles = () => {
-    vehiclesAPI = "http://swapi.co/api/vehicles/";
+    vehiclesAPI = "https://swapi.co/api/vehicles/";
     swapiOptions = {
         search: keyword
     };
@@ -267,7 +267,7 @@ let searchVehicles = () => {
 
 // the AJAX films part
 let searchFilms = () => {
-    filmAPI = "http://swapi.co/api/films/";
+    filmAPI = "https://swapi.co/api/films/";
     
     $.getJSON(filmAPI, displaySearchFilmResults);
 }; 
@@ -302,7 +302,7 @@ let selectResource = (searchResource) => {
 $('select').change(() => {
     $('#search').val('');
     $('main').html('');
-    $('#count_cont').html('<img src="../img/ripple.svg" alt="">');
+    $('#count_cont').html('<img src="/img/ripple.svg" alt="">');
     setTimeout(function() {
         displayCount();
         $('#search').val('');
@@ -316,7 +316,7 @@ $('select').change(() => {
 });
 $('form').submit((evt) => {
     evt.preventDefault();
-    $('.names').html('<img src="../img/ellipsis.svg" alt="">');
+    $('.names').html('<img src="/img/ellipsis.svg" alt="">');
     searchResource = $('select option:selected').val();
     console.log(searchResource);
     searchValue();//gets input text    
@@ -328,7 +328,7 @@ $('form').submit((evt) => {
 $('#random').click(() => {
     $('#search').val('');
     $('main').html('');
-    $('main').html('<img src="../img/ellipsis.svg" alt="">');
+    $('main').html('<img src="/img/ellipsis.svg" alt="">');
     //Get resource to search
     //searchResource = searchResource.toLowerCase();
     //run function that takes the resource and gets a random number between 1 and however many items are in that resource

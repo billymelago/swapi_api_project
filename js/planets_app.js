@@ -2,14 +2,14 @@
 //This gets displayed in the overlay
 let showPlanetsStats = (name) => {
     $overlay.show(function() {
-        $('#data_cont').html('<img src="../img/ripple.svg" alt="">');
+        $('#data_cont').html('<img src="/img/ripple.svg" alt="">');
     });
     setTimeout(function() {
     //Get person data
-    $.getJSON('http://swapi.co/api/films/', function (filmResponse) {
+    $.getJSON('https://swapi.co/api/films/', function (filmResponse) {
         var films = filmResponse.results;
         //Get People data
-        $.getJSON('http://swapi.co/api/planets/?search=' + name, function (planetResponse) {
+        $.getJSON('https://swapi.co/api/planets/?search=' + name, function (planetResponse) {
             var data = planetResponse;
             var rotation, orbit, diameter, climate, gravity, terrain, water, population;
             var planetHTML = '<p>Information for the Planet: ' + name + '</p>';

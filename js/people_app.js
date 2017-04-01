@@ -2,14 +2,14 @@
 //This gets displayed in the overlay
 let showPeopleStats = (name) => {
     $overlay.show(function() {
-        $('#data_cont').html('<img src="../img/ripple.svg" alt="">');
+        $('#data_cont').html('<img src="/img/ripple.svg" alt="">');
     });
     setTimeout(function() {
     //Get person data
-    $.getJSON('http://swapi.co/api/films/', function (filmResponse) {
+    $.getJSON('https://swapi.co/api/films/', function (filmResponse) {
         var films = filmResponse.results;
         //Get People data
-        $.getJSON('http://swapi.co/api/people/?search=' + name, function (peopleResponse) {
+        $.getJSON('https://swapi.co/api/people/?search=' + name, function (peopleResponse) {
             var data = peopleResponse;
             var birthday, meters, realfeet, feet, inches, height, mass, gender;
             console.log(name);

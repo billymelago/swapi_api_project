@@ -2,14 +2,14 @@
 //This gets displayed in the overlay
 let showStarshipStats = (starshipName) => {
     $overlay.show(function() {
-        $('#data_cont').html('<img src="../img/ripple.svg" alt="">');
+        $('#data_cont').html('<img src="/img/ripple.svg" alt="">');
     });
     setTimeout(function() {
     //Get person data
-    $.getJSON('http://swapi.co/api/films/', function (filmResponse) {
+    $.getJSON('https://swapi.co/api/films/', function (filmResponse) {
         var films = filmResponse.results;
         //Get People data
-        $.getJSON('http://swapi.co/api/starships/?search=' + starshipName, function (starshipResponse) {
+        $.getJSON('https://swapi.co/api/starships/?search=' + starshipName, function (starshipResponse) {
             var starData = starshipResponse.results[0];
             console.log(starData);
             var model, starshipClass, manufacturer, cost, length, crew, passengers, atmosphericSpeed, hyperdrive, MGLT, cargo, consumables;

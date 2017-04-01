@@ -2,14 +2,14 @@
 //This gets displayed in the overlay
 let showSpeciesStats = (speciesName) => {
     $overlay.show(function() {
-        $('#data_cont').html('<img src="../img/ripple.svg" alt="">');
+        $('#data_cont').html('<img src="/img/ripple.svg" alt="">');
     });
     setTimeout(function() {
     //Get person data
-    $.getJSON('http://swapi.co/api/films/', function (filmResponse) {
+    $.getJSON('https://swapi.co/api/films/', function (filmResponse) {
         var films = filmResponse.results;
         //Get People data
-        $.getJSON('http://swapi.co/api/species/?search=' + speciesName, function (speciesResponse) {
+        $.getJSON('https://swapi.co/api/species/?search=' + speciesName, function (speciesResponse) {
             var data = speciesResponse;
             var speciesClass, designation, height, skinColors, hairColors, eyeColors, averageLife, speakLanguage;
             var speciesHTML = '<p>Information for the ' + speciesName + ' Species</p>';

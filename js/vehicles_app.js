@@ -2,14 +2,14 @@
 //This gets displayed in the overlay
 let showvehicleStats = (vehicleName) => {
     $overlay.show(function() {
-        $('#data_cont').html('<img src="../img/ripple.svg" alt="">');
+        $('#data_cont').html('<img src="/img/ripple.svg" alt="">');
     });
     setTimeout(function() {
     //Get person data
-    $.getJSON('http://swapi.co/api/films/', function (filmResponse) {
+    $.getJSON('https://swapi.co/api/films/', function (filmResponse) {
         var films = filmResponse.results;
         //Get People data
-        $.getJSON('http://swapi.co/api/vehicles/?search=' + vehicleName, function (vehicleResponse) {
+        $.getJSON('https://swapi.co/api/vehicles/?search=' + vehicleName, function (vehicleResponse) {
             var data = vehicleResponse;
             var model, vehicleClass, manufacturer, cost, length, crew, passengers, atmosphericSpeed, cargo, consumables;
             var starHTML = '<p>Information for the ' + vehicleName + '</p>';
