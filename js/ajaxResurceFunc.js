@@ -1,16 +1,16 @@
 
 let searchResource = $('select option:selected').val();
 
-let searchValue = () =>{
+let searchValue = () => {
     keyword = $('#search').val().toLowerCase();
 };
 
-let createRandoNumber = (x) =>{
+let createRandoNumber = (x) => {
     randomPageNum = Math.floor((Math.random() * x) + 1);
     return randomPageNum;
 };
 
-let createRandoLetter = () =>{
+let createRandoLetter = () => {
     letters = 'abcdefghijklmnoprstuvwxyz';
     pickLetter = Math.floor(Math.random() * letters.length);
     randomLetter = letters.charAt(pickLetter);
@@ -190,7 +190,7 @@ let getDataCount = (sr) => {
 //Gets the selected resource and inserts the random page to search
 let searchRandoResource = (rpn) => {
     searchResource = searchResource.toLowerCase();
-    randomAPI = "https://swapi.co/api/" + searchResource; //+ rpn + "/";
+    randomAPI = "https://swapi.co/api/" + searchResource;
     randoOptions = {
         search: rpn
     }
