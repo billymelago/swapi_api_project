@@ -9,7 +9,7 @@ let showPeopleStats = (name) => {
     $.getJSON('https://swapi.co/api/films/', function (filmResponse) {
         var films = filmResponse.results;
         //Get People data
-        $.getJSON('https://swapi.co/api/people/?search=' + name, function (peopleResponse) {
+        $.getJSON('https://swapi.co/api/people/', {search: name}, function (peopleResponse) {
             var data = peopleResponse;
             var birthday, meters, realfeet, feet, inches, height, mass, gender;
             console.log(name);
@@ -17,6 +17,7 @@ let showPeopleStats = (name) => {
             peopleHTML += '<h2>' + data.results[0].name + '</h2>';
             peopleHTML += '<div id="data_stats_cont">';
             $.each(data.results, function (i, peopleData) {
+                console.log(peopleData);
                 gender = peopleData.gender;
                 if (gender === 'male') {
                     gender = 'He';
@@ -71,7 +72,7 @@ let showPeopleStats = (name) => {
                     peopleHTML += '</li>';
                     
                 } //end if films have length
-                $.getJSON(peopleData.homeworld, function (homeworldResponse) {
+                $.getJSON(peopleData.homeworld, {dataType: "jsonp"}, function (homeworldResponse) {
                     var homePlanet = homeworldResponse.name;
                     if (homePlanet == 'unknown') {
                         peopleHTML += '<h3>It is not documented on which planet ' + peopleData.name + ' was born.</h3>';
@@ -82,7 +83,7 @@ let showPeopleStats = (name) => {
                     console.log(homeworldResponse.name);
                 });//End getJSON homeworld
                 
-                $.getJSON(peopleData.species, function (speciesResponse) {
+                $.getJSON(peopleData.species, {dataType: "jsonp"}, function (speciesResponse) {
                     var species = speciesResponse.name;
                     var lifeSpan = speciesResponse.average_lifespan;
                     var language = speciesResponse.language;
