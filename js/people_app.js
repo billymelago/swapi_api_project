@@ -72,7 +72,7 @@ let showPeopleStats = (name) => {
                     peopleHTML += '</li>';
                     
                 } //end if films have length
-                $.getJSON(peopleData.homeworld, {dataType: "jsonp"}, function (homeworldResponse) {
+                $.getJSON(peopleData.homeworld, function (homeworldResponse) {
                     var homePlanet = homeworldResponse.name;
                     if (homePlanet == 'unknown') {
                         peopleHTML += '<h3>It is not documented on which planet ' + peopleData.name + ' was born.</h3>';
@@ -83,7 +83,7 @@ let showPeopleStats = (name) => {
                     console.log(homeworldResponse.name);
                 });//End getJSON homeworld
                 
-                $.getJSON(peopleData.species, {dataType: "jsonp"}, function (speciesResponse) {
+                $.getJSON(peopleData.species, function (speciesResponse) {
                     var species = speciesResponse.name;
                     var lifeSpan = speciesResponse.average_lifespan;
                     var language = speciesResponse.language;
