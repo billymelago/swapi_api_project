@@ -6,10 +6,10 @@ let showPeopleStats = (name) => {
     });
     setTimeout(function() {
     //Get person data
-    $.getJSON('https://swapi.co/api/films/', function (filmResponse) {
+    $.getJSON('http://swapi.co/api/films/', function (filmResponse) {
         var films = filmResponse.results;
         //Get People data
-        $.getJSON('https://swapi.co/api/people/?search=' + name, function (peopleResponse) {
+        $.getJSON('http://swapi.co/api/people/?search=' + name, function (peopleResponse) {
             var data = peopleResponse;
             var birthday, meters, realfeet, feet, inches, height, mass, gender;
             console.log(name);
