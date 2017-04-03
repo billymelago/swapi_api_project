@@ -190,11 +190,11 @@ let getDataCount = (sr) => {
 //Gets the selected resource and inserts the random page to search
 let searchRandoResource = (rpn) => {
     searchResource = searchResource.toLowerCase();
-    randomAPI = "https://swapi.co/api/" + searchResource;
-    randoOptions = {
+    randomAPI = "https://swapi.co/api/" + searchResource + "/?search=" + rpn;
+    /*randoOptions = {
         search: rpn
-    }
-    $.getJSON(randomAPI, randoOptions, displaySearchResults).fail(function() {
+    }*/
+    $.getJSON(randomAPI, displaySearchResults).fail(function() {
         $('main').html('<p>Sorry, resource number ' + rpn + ' in ' + searchResource + ' has no information to display.</p>');
   });
 };
