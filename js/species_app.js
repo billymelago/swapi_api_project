@@ -52,7 +52,8 @@ let showSpeciesStats = (speciesName) => {
                     speciesHTML += '</ol></li>';
                 } //end if films have length
                
-                $.getJSON(speciesData.homeworld, function (homeworldResponse) {
+                $.getJSON(speciesData.homeworld.replace('http', 'https'), function (homeworldResponse) {
+                    console.log(speciesData.homeworld);
                     var homePlanet = homeworldResponse.name;
                     if (homePlanet == 'unknown') {
                         speciesHTML += '<h3>It is not documented on which planet ' + speciesData.name + ' was born.</h3>';
