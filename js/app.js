@@ -19,7 +19,7 @@ $(document).ready(function () {
         $('#nav-container').toggleClass("pushed");
     });
     $swClose.click(function (){
-        $overlay.hide();
+        $overlay.fadeOut();
         $('#data_cont').html("");
         $('#film_cont').html("");
     });

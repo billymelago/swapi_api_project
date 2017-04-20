@@ -244,7 +244,7 @@ main li:hover {
     display: block;
 }
 #data_cont {
-    background: rgba(0,0,0,.4);
+    background: rgba(0,0,0,.5);
     max-width: 640px;
     margin: 0 auto;
     padding: 0;

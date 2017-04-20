@@ -106,6 +106,7 @@ let showPeopleStats = (name) => {
                         };
                     
                     $('#data_cont').html(peopleHTML);
+                    $('#data_cont').fadeIn(10000);
                     //Click on title to display overlay, stats and call Spotify
                     $('.film_name').click(function(){
                         //Get the name of the film that was clicked
@@ -119,7 +120,6 @@ let showPeopleStats = (name) => {
             peopleHTML += '</div>';
             
             $('#data_cont').html(peopleHTML);
-            $overlay.show();
             
         }); // end JSON(peopleResponse)
         

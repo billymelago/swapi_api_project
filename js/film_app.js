@@ -62,6 +62,7 @@ let showFilmStats = (filmTitle) => {
                 
             }); // end each
             $('#data_cont').html(filmHTML);
+            $('#data_cont_head').hide().fadeIn('fast');
             /*$('#opening_crawl p').animate({
                 opacity: 0,
                 top: "-1200px"
